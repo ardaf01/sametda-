@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" width="240" height="100">
+  <defs>
+    <!-- Gold gradient for trajectory and text accents -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfba82" />
+      <stop offset="50%" stop-color="#c5a880" />
+      <stop offset="100%" stop-color="#a8895f" />
+    </linearGradient>
+  </defs>
+
+  <!-- Mountain peaks (solid dark gray/black) -->
+  <!-- Left Peak -->
+  <path d="M 35,48 L 52,28 L 68,48 Z" fill="#1a1c23" />
+  
+  <!-- Right Peak -->
+  <path d="M 108,48 L 130,28 L 148,48 Z" fill="#1a1c23" />
+
+  <!-- Middle Peak (Largest, layered) -->
+  <path d="M 52,48 L 88,12 L 125,48 Z" fill="#0c0d12" />
+  
+  <!-- Snow caps (White highlights on peaks) -->
+  <!-- Middle Peak Snow -->
+  <path d="M 80,20 L 88,12 L 96,20 L 92,18 L 88,21 L 84,18 Z" fill="#ffffff" />
+  <!-- Right Peak Snow -->
+  <path d="M 125,33 L 130,28 L 135,33 L 133,31 L 130,33 L 127,31 Z" fill="#ffffff" />
+
+  <!-- Golden trajectory swoop -->
+  <path d="M 30,42 C 40,28 75,5 152,18" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Golden Airplane Icon at the end of the trajectory -->
+  <g transform="translate(150, 16) rotate(15) scale(0.6)">
+    <!-- Stylized plane shape -->
+    <path d="M 0,0 L -12,-4 L -11,-1 L -5,0 L -15,5 L -13,7 L -3,3 L -2,8 L -5,10 L -4,11 L 1,9 L 3,3 Z" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- MOUNTAIN Brand Text -->
+  <text x="120" y="70" font-family="'Playfair Display', 'Georgia', 'Times New Roman', serif" font-size="21" font-weight="900" fill="#1a1c23" text-anchor="middle" letter-spacing="4px">MOUNTAIN</text>
+
+  <!-- TRAVEL & TRANSFER Sub-text -->
+  <text x="120" y="88" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="3.5px">TRAVEL &amp; TRANSFER</text>
+
+  <!-- Decorative gold lines flanking the sub-text -->
+  <line x1="20" y1="85" x2="60" y2="85" stroke="url(#goldGrad)" stroke-width="1.2" />
+  <line x1="180" y1="85" x2="220" y2="85" stroke="url(#goldGrad)" stroke-width="1.2" />
+</svg>
