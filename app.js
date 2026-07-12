@@ -2059,9 +2059,9 @@ function renderFleetCards() {
                 </div>
                 <div class="fleet-footer" style="display:flex; flex-direction:column; gap:0.8rem; align-items:stretch;">
                     <button type="button" class="btn ${isPremium ? 'btn-premium' : 'btn-primary'}" onclick="openBookingModal('transfer', '${id}')" style="width:100%; padding:0.75rem 1.2rem; font-weight:700; font-size:0.9rem; text-transform:uppercase;">${dict.fleet_book_btn}</button>
-                    <button type="button" class="btn btn-outline-gallery" onclick="openVehicleGallery('${id}')" style="width:100%; border:1px solid rgba(255,255,255,0.15); color:#ffffff; background:rgba(255,255,255,0.04); padding:0.55rem; font-size:0.78rem; border-radius:8px; cursor:pointer; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.35rem; transition:all 0.2s;">
-                        <i class="fas fa-images"></i> ${lang === 'tr' ? 'Araç Kabinini İncele (Galeri)' : 'Explore Cabin (Gallery)'}
-                    </button>
+                    <a href="https://wa.me/905442595196?text=Merhaba,%20${encodeURIComponent(vehicle.name)}%20VIP%20transfer%20hakkinda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn" style="width:100%; border:1px solid rgba(197,168,128,0.3); color:#c5a880; background:rgba(197,168,128,0.05); padding:0.55rem; font-size:0.78rem; border-radius:8px; cursor:pointer; font-weight:600; display:flex; align-items:center; justify-content:center; gap:0.35rem; transition:all 0.2s; text-decoration:none;">
+                        <i class="fab fa-whatsapp"></i> ${lang === 'tr' ? 'WhatsApp ile Bilgi Al' : 'Inquire via WhatsApp'}
+                    </a>
                 </div>
             </div>
         `;
