@@ -297,7 +297,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=1.4">
+    <link rel="stylesheet" href="style.css?v=1.5">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -381,6 +381,21 @@
 
         .hero-slider-section {
             padding-top: 130px !important;
+        }
+
+        .contact-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+    }
+    @media (max-width: 768px) {
+        .contact-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
         }
     }
     @media (max-width: 1250px) and (min-width: 769px) {
@@ -1606,7 +1621,7 @@
                 <p class="section-subtitle" data-translate="contact_subtitle">Özel seyahat planları, kongre transferleri veya sorularınız için 7/24 hizmetinizdeyiz</p>
             </div>
             
-            <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+            <div class="contact-grid">
                 <!-- Left contact channels -->
                 <div style="background: var(--bg-secondary); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
                     <div style="margin-bottom: 2rem;">
@@ -2162,6 +2177,6 @@
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
 
     <!-- Application Script -->
-    <script src="app.js?v=1.4"></script>
+    <script src="app.js?v=1.5"></script>
 </body>
 </html>
