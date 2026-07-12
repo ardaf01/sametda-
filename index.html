@@ -297,7 +297,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="stylesheet" href="style.css?v=1.6">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -384,17 +384,15 @@
         }
 
         .contact-grid {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
     }
     @media (max-width: 768px) {
         .contact-grid {
-            grid-template-columns: 1fr !important;
             gap: 1.5rem !important;
         }
     }
@@ -2177,6 +2175,6 @@
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
 
     <!-- Application Script -->
-    <script src="app.js?v=1.5"></script>
+    <script src="app.js?v=1.6"></script>
 </body>
 </html>
