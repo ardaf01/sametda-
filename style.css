@@ -3544,7 +3544,7 @@ header {
     /* --- Hero slider --- */
     .hero-slider-section {
         min-height: 100svh !important; /* svh = small viewport height, avoids iOS address bar jump */
-        padding-top: 100px !important;
+        padding-top: 140px !important;
     }
 
     .hero-slide-title {
@@ -3624,16 +3624,35 @@ header {
 
     /* --- Navigation container --- */
     .nav-container {
-        height: 75px !important;
-        padding: 0 1rem !important;
+        height: 115px !important;
+        padding: 10px 1rem 0 1rem !important;
+        align-items: flex-start !important;
+        position: relative !important;
     }
 
     .brand-logo-img {
-        height: 62px !important;
+        height: 50px !important;
     }
 
     .nav-actions {
         gap: 0.6rem !important;
+        align-items: center !important;
+        height: 50px !important;
+    }
+
+    #nav-call-btn {
+        position: absolute !important;
+        bottom: 8px !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        width: calc(100% - 2rem) !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 0.78rem !important;
+        padding: 0.4rem 1rem !important;
+        height: 34px !important;
     }
 
     /* Currency dropdown */
