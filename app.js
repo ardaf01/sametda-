@@ -3,12 +3,13 @@ const state = {
     currentLang: (() => {
         const urlParams = new URLSearchParams(window.location.search);
         const urlLang = urlParams.get('lang');
-        if (urlLang && ['tr', 'en', 'de', 'ru'].includes(urlLang.toLowerCase())) {
+        if (urlLang && ['tr', 'en', 'de', 'ru', 'ro'].includes(urlLang.toLowerCase())) {
             return urlLang.toLowerCase();
         }
         const browserLang = (navigator.language || navigator.userLanguage || 'tr').toLowerCase();
         if (browserLang.startsWith('de')) return 'de';
         if (browserLang.startsWith('ru')) return 'ru';
+        if (browserLang.startsWith('ro')) return 'ro';
         if (browserLang.startsWith('en')) return 'en';
         return 'tr';
     })(),
@@ -39,10 +40,11 @@ const state = {
 const sights = {
     kaleici: {
         id: 'kaleici',
-        names: { tr: 'Kaleiçi & Tarihi Liman', en: 'Kaleiçi & Old Harbor' },
+        names: { tr: 'Kaleiçi & Tarihi Liman', en: 'Kaleiçi & Old Harbor', ro: 'Kaleiçi și Portul Istoric' },
         descriptions: {
             tr: 'Antalya’nın kalbi olan Kaleiçi, dar sokakları, Osmanlı mimarisi taş evleri, Hadrian Kapısı (Üçkapılar) ve tarihi yat limanıyla büyüleyici bir atmosfere sahiptir.',
-            en: 'The heart of Antalya, Kaleiçi features narrow cobblestone streets, Ottoman-era stone mansions, Hadrian’s Gate, and a historic yacht harbor with a mesmerizing atmosphere.'
+            en: 'The heart of Antalya, Kaleiçi features narrow cobblestone streets, Ottoman-era stone mansions, Hadrian’s Gate, and a historic yacht harbor with a mesmerizing atmosphere.',
+            ro: 'Inima Antalyei, Kaleiçi, are o atmosferă fermecătoare cu străzi înguste, case din piatră de epocă otomană, Poarta lui Hadrian și un port istoric de iahturi.'
         },
         duration: 3, // hours
         img: 'assets/kaleici.png', // Fallback or customized
@@ -50,10 +52,11 @@ const sights = {
     },
     aspendos: {
         id: 'aspendos',
-        names: { tr: 'Aspendos Antik Tiyatrosu', en: 'Aspendos Ancient Theatre' },
+        names: { tr: 'Aspendos Antik Tiyatrosu', en: 'Aspendos Ancient Theatre', ro: 'Teatrul Antic Aspendos' },
         descriptions: {
             tr: 'Roma döneminden günümüze kadar en iyi korunmuş antik tiyatrolardan biridir. Akustik harikası bu devasa yapı, günümüzde hala konser ve festivallere ev sahipliği yapmaktadır.',
-            en: 'One of the best-preserved Roman theatres in the world. Famous for its perfect acoustics, this colossal structure still hosts concerts and opera festivals today.'
+            en: 'One of the best-preserved Roman theatres in the world. Famous for its perfect acoustics, this colossal structure still hosts concerts and opera festivals today.',
+            ro: 'Unul dintre cele mai bine conservate teatre antice din perioada romană. Această structură uriașă, o minune a acusticii, găzduiește și astăzi concerte și festivaluri.'
         },
         duration: 4,
         img: 'assets/aspendos.png',
@@ -61,10 +64,11 @@ const sights = {
     },
     duden: {
         id: 'duden',
-        names: { tr: 'Düden Şelaleleri (Yukarı & Aşağı)', en: 'Düden Waterfalls (Upper & Lower)' },
+        names: { tr: 'Düden Şelaleleri (Yukarı & Aşağı)', en: 'Düden Waterfalls (Upper & Lower)', ro: 'Cascadele Düden (Superioară & Inferioară)' },
         descriptions: {
             tr: 'Yukarı Düden, yemyeşil bir doğa içindeki şelale ve mağarasıyla huzur verirken; Aşağı Düden (Karpuzkaldıran), 40 metre yükseklikten doğrudan Akdeniz’e dökülen muhteşem bir manzara sunar.',
-            en: 'Upper Düden offers tranquility in lush green nature with its cave and falls, while Lower Düden (Karpuzkaldıran) presents a spectacular sight as it cascades 40 meters directly into the sea.'
+            en: 'Upper Düden offers tranquility in lush green nature with its cave and falls, while Lower Düden (Karpuzkaldıran) presents a spectacular sight as it cascades 40 meters directly into the sea.',
+            ro: 'Düden de Sus oferă liniște în mijlocul naturii cu cascada și peștera sa, în timp ce Düden de Jos (Karpuzkaldıran) oferă o priveliște minunată, căzând direct în Marea Mediterană de la o înălțime de 40 de metri.'
         },
         duration: 3,
         img: 'assets/duden.png',
@@ -72,10 +76,11 @@ const sights = {
     },
     phaselis: {
         id: 'phaselis',
-        names: { tr: 'Phaselis Antik Kenti & Koyu', en: 'Phaselis Ancient City & Bay' },
+        names: { tr: 'Phaselis Antik Kenti & Koyu', en: 'Phaselis Ancient City & Bay', ro: 'Orașul Antic și Golful Phaselis' },
         descriptions: {
             tr: 'Kemer yakınlarında, çam ağaçları arasına gizlenmiş antik liman kenti. Üç muhteşem doğal koyu ve sığ, sakin deniziyle hem tarih hem de yüzme keyfini bir arada sunar.',
-            en: 'An ancient harbor city hidden among pine forests near Kemer. Boasting three beautiful natural bays and calm shallow waters, it combines history with swimming pleasure.'
+            en: 'An ancient harbor city hidden among pine forests near Kemer. Boasting three beautiful natural bays and calm shallow waters, it combines history with swimming pleasure.',
+            ro: 'Oraș-port antic ascuns printre pini, lângă Kemer. Cu cele trei goluri naturale superbe și marea sa liniștită, oferă atât istorie, cât și plăcerea de a înota.'
         },
         duration: 5,
         img: 'assets/phaselis.png',
@@ -83,10 +88,11 @@ const sights = {
     },
     saklikent: {
         id: 'saklikent',
-        names: { tr: 'Saklıkent Kanyonu', en: 'Saklıkent Gorge & Canyon' },
+        names: { tr: 'Saklıkent Kanyonu', en: 'Saklıkent Gorge & Canyon', ro: 'Canionul Saklıkent' },
         descriptions: {
             tr: 'Türkiye’nin en derin kanyonlarından biri. Buz gibi akan suların içinde yürüyüş yapabileceğiniz, rafting ve çamur banyosu aktiviteleri sunan macera dolu bir doğa harikası.',
-            en: 'One of the deepest canyons in Turkey. An adventurous natural wonder where you can walk through freezing rushing waters, try rafting, and enjoy mud baths.'
+            en: 'One of the deepest canyons in Turkey. An adventurous natural wonder where you can walk through freezing rushing waters, try rafting, and enjoy mud baths.',
+            ro: 'Unul dintre cele mai adânci canioane din Turcia. O minune a naturii plină de aventură, unde puteți face drumeții în ape reci ca gheața, rafting și băi de nămol.'
         },
         duration: 7,
         img: 'assets/saklikent.png',
@@ -94,10 +100,11 @@ const sights = {
     },
     perge: {
         id: 'perge',
-        names: { tr: 'Perge Antik Kenti', en: 'Perge Ancient City' },
+        names: { tr: 'Perge Antik Kenti', en: 'Perge Ancient City', ro: 'Orașul Antic Perge' },
         descriptions: {
             tr: 'Pamfilya bölgesinin eski başkenti olan Perge; sütunlu caddeleri, antik hamamları, anıtsal çeşmeleri (nymphaeum) ve dev stadyumu ile arkeoloji meraklıları için eşsiz bir duraktır.',
-            en: 'The former capital of the Pamphylia region, Perge features grand colonnaded streets, Roman baths, monumental fountains, and a massive ancient stadium.'
+            en: 'The former capital of the Pamphylia region, Perge features grand colonnaded streets, Roman baths, monumental fountains, and a massive ancient stadium.',
+            ro: 'Fosta capitală a regiunii Pamfilia, Perge este o oprire unică pentru pasionații de arheologie cu străzile sale cu coloane, băile antice, fântânile monumentale și stadionul uriaș.'
         },
         duration: 3,
         img: 'assets/perge.png',
@@ -105,10 +112,11 @@ const sights = {
     },
     kemer_canyon: {
         id: 'kemer_canyon',
-        names: { tr: 'Göynük Kanyonu', en: 'Göynük Canyon' },
+        names: { tr: 'Göynük Kanyonu', en: 'Göynük Canyon', ro: 'Canionul Göynük' },
         descriptions: {
             tr: 'Kemer bölgesinde yer alan, macera parkurları, zipline aktiviteleri ve harika yeşil doğasıyla bilinen popüler bir kanyon ve yürüyüş rotasıdır.',
-            en: 'Located in the Kemer region, it is a famous canyon and trekking route known for its adventure tracks, zipline activities, and luxury green scenery.'
+            en: 'Located in the Kemer region, it is a famous canyon and trekking route known for its adventure tracks, zipline activities, and luxury green scenery.',
+            ro: 'Situat în regiunea Kemer, este un canion popular și un traseu de drumeții cunoscut pentru traseele de aventură, activitățile de zipline și natura sa verde minunată.'
         },
         duration: 4,
         img: 'assets/goynuk.png',
@@ -116,10 +124,11 @@ const sights = {
     },
     alanya_castle: {
         id: 'alanya_castle',
-        names: { tr: 'Alanya Kalesi & Damlataş', en: 'Alanya Castle & Damlataş Cave' },
+        names: { tr: 'Alanya Kalesi & Damlataş', en: 'Alanya Castle & Damlataş Cave', ro: 'Castelul Alanya și Peștera Damlataş' },
         descriptions: {
             tr: 'Yarımada üzerinde yükselen Selçuklu kalesi, muhteşem Kleopatra Plajı manzarası ve astım hastalarına şifa veren Damlataş Mağarası ile Alanya’nın simgesidir.',
-            en: 'The Seljuk fortress rising high on the peninsula, overlooking the famous Cleopatra Beach, combined with Damlataş Cave known for its healing microclimate.'
+            en: 'The Seljuk fortress rising high on the peninsula, overlooking the famous Cleopatra Beach, combined with Damlataş Cave known for its healing microclimate.',
+            ro: 'Castelul Selgiuc ridicat pe peninsulă, cu vedere la faimoasa plajă Cleopatra, combinat cu peștera Damlataș, renumită pentru microclimatul său vindecător.'
         },
         duration: 6,
         img: 'assets/alanya.png',
@@ -213,8 +222,9 @@ const vehicles = {
         amenities: {
             tr: ['Yatarlı Deri Konfor Koltuklar', 'Ücretsiz Wi-Fi & Şarj Üniteleri', 'VIP İsimle Karşılama Hizmeti', 'Mini Bar & Buzdolabı', 'Klima & İklimlendirme'],
             en: ['Reclining Leather Comfort Seats', 'Free Wi-Fi & Charging Ports', 'VIP Name Sign Welcome Service', 'Mini Bar & Fridge', 'Air Conditioning & Climate Control'],
-            de: ['Verstellbare Leder-Komfortsitze', 'Kostenloses WLAN & Ladeanschlüsse', 'VIP Namensschild Empfang', 'Mini-Bar & Kühlschrank', 'Klimaanlage & Belüftung'],
-            ru: ['Откидные кожаные комфортные сиенья', 'Бесплатный Wi-Fi и зарядные порты', 'VIP встреча с именной табличкой', 'Мини-бар и холодильник', 'Кондиционер и климат-контроль']
+            de: ['Verstellbare Leder-Comfortsitze', 'Kostenloses WLAN & Ladeanschlüsse', 'VIP Namensschild Empfang', 'Mini-Bar & Kühlschrank', 'Klimaanlage & Belüftung'],
+            ru: ['Откидные кожаные комфортные сиенья', 'Бесплатный Wi-Fi и зарядные порты', 'VIP встреча с именной табличкой', 'Мини-бар и холодильник', 'Кондиционер и климат-контроль'],
+            ro: ['Scaune de Confort Reclinabile din Piele', 'Wi-Fi Gratuit și Porturi de Încărcare', 'Serviciu de Întâmpinare VIP cu Nume', 'Mini Bar și Frigider', 'Aer Condiționat și Climatizare']
         }
     },
     vito_premium: {
@@ -229,7 +239,8 @@ const vehicles = {
             tr: ['Özel Antalya Tur Hizmeti (Pamukkale, Kapadokya vb.)', 'Araç İçi Bölme (Partition) & Multimedya TV', 'Yıldızlı Tavan Ambiyans Aydınlatması', 'VIP İsimle Karşılama Hizmeti', 'Mini Bar & Buzdolabı'],
             en: ['Private Antalya Tour Service (Pamukkale, Cappadocia etc.)', 'Private Cabin Partition & Multimedia TV', 'Star Ceiling Ambient Lighting', 'VIP Name Board Welcome Service', 'Mini Bar & Fridge'],
             de: ['Privater Antalya Tour-Service (Pamukkale, Kappadokien usw.)', 'Kabinentrennwand & Multimedia-TV', 'Sternenhimmel-Ambiente', 'VIP Namensschild Empfang', 'Mini-Bar & Kühlschrank'],
-            ru: ['Частный тур по Анталье (Памуккале, Каппадокия и др.)', 'Перегородка кабины и мультимедийный ТВ', 'Звёздный потолок', 'VIP встреча с именной табличкой', 'Мини-бар и холодильник']
+            ru: ['Частный тур по Анталье (Памуккале, Каппадокия и др.)', 'Перегородка кабины и мультимедийный ТВ', 'Звёздный потолок', 'VIP встреча с именной табличкой', 'Мини-бар и холодильник'],
+            ro: ['Serviciu Privat de Tur Antalya (Pamukkale, Cappadocia etc.)', 'Perete Separator Cabină Privat & TV Multimediă', 'Iluminat Ambiental Tavan cu Stele', 'Serviciu de Întâmpinare VIP cu Tabela', 'Mini Bar și Frigider']
         }
     },
     sprinter: {
@@ -243,7 +254,8 @@ const vehicles = {
             tr: ['Yatarlı Konfor Koltuklar', 'Mini Bar & Buzdolabı', 'Geniş Bagaj Hacmi', 'Premium Multimedya Ses Sistemi', 'Yüksek Tavan Ferahlığı'],
             en: ['Reclining Comfort Seats', 'Mini Bar & Fridge', 'Extra Large Luggage Capacity', 'Premium Multimedia Sound System', 'Spacious High-Roof Cabin'],
             de: ['Verstellbare Komfortsitze', 'Mini-Bar & Kühlschrank', 'Sehr großer Gepäckraum', 'Premium-Multimedia-Soundsystem', 'Geräumige Kabine mit hohem Dach'],
-            ru: ['Откидные комфортные сиденья', 'Мини-бар и холодильник', 'Большое багажное отделение', 'Мультимедийная аудиосистема премиум-класса', 'Просторный салон с высокой крышей']
+            ru: ['Откидные комфортные сиденья', 'Мини-бар и холодильник', 'Большое багажное отделение', 'Мультимедийная аудиосистема премиум-класса', 'Просторный салон с высокой крышей'],
+            ro: ['Scaune de Confort Reclinabile', 'Mini Bar și Frigider', 'Capacitate Deosebită de Bagaje', 'Sistem de Sunet Multimediă Premium', 'Cabină Spațioasă cu Tavan Înalt']
         }
     },
     shuttle: {
@@ -257,7 +269,8 @@ const vehicles = {
             tr: ['Standart Konfor Koltuklar', 'Klima Sistemi', 'Geniş Bagaj Bölümü', 'USB Şarj Portları', 'Sigortalı Yolculuk'],
             en: ['Standard Comfort Seats', 'Air Conditioning System', 'Extra Large Luggage Space', 'USB Charging Ports', 'Fully Insured Travel'],
             de: ['Bequeme Standardsitze', 'Klimaanlage', 'Großes Gepäckraumfach', 'USB-Ladeanschlüsse', 'Vollversicherter Transport'],
-            ru: ['Стандартные комфортные сиденья', 'Кондиционер', 'Большое багажное отделение', 'USB зарядные порты', 'Застрахованный трансфер']
+            ru: ['Стандартные комфортные сиденья', 'Кондиционер', 'Большое багажное отделение', 'USB зарядные порты', 'Застрахованный трансфер'],
+            ro: ['Scaune de Confort Standard', 'Sistem de Aer Condiționat', 'Spațiu Suplimentar de Bagaje', 'Porturi de Încărcare USB', 'Călătorie Complet Asigurată']
         }
     }
 };
@@ -1017,6 +1030,187 @@ const translations = {
         video_title: 'Mountain VIP Опыт Путешествий',
         video_subtitle: 'Посмотрите видео о нашем премиальном автопарке, персональной встрече и первоклассном комфорте в пути'
     },
+    ro: {
+        brand: 'Mountain<span>VIP</span>',
+        nav_home: 'Acasă',
+        nav_fleet: 'Flota VIP',
+        nav_tours: 'Atracții',
+        nav_why: 'De ce noi',
+        nav_faq: 'Întrebări frecvente',
+        nav_contact: 'Contact',
+        cta_call: 'Rezervări & Suport 24/7',
+        hero_badge: 'Transport VIP 24/7 în toată Antalya',
+        hero_title: 'Antalya VIP Transfer 24/7 | Experiență de Transport Premium',
+        hero_text: 'Călătoriți în confort și stil 24/7 de la aeroport la hotel sau la orice destinație din Antalya cu vehiculele noastre VIP de ultimă generație, ultra-luxoase, și șoferi profesioniști certificați.',
+        hero_feat_1: 'Întâmpinare gratuită la aeroport',
+        hero_feat_2: 'Urmărire live a zborului',
+        hero_feat_3: 'Prețuri fixe & Anulare gratuită',
+        widget_title: 'Formular de Rezervare VIP',
+        widget_pickup: 'Locație Preluare (De unde?)',
+        widget_dropoff: 'Locație Destinație (Către?)',
+        widget_date: 'Data Transferului',
+        widget_time: 'Ora Transferului',
+        widget_pax: 'Număr Pasageri',
+        widget_vehicle: 'Tip Vehicul',
+        widget_btn: 'Calculează Prețul',
+        fleet_title: 'Flota Noastră VIP Exclusivă',
+        fleet_subtitle: 'Explorați gama noastră de vehicule premium echipate de lux, concepute pentru confortul dumneavoastră absolut',
+        fleet_capacity: 'Pers.',
+        fleet_bags: 'Bagaje',
+        fleet_from: 'Tarif Transfer',
+        fleet_book_btn: 'Rezervă Acum',
+        why_title: 'De ce să alegeți Mountain VIP?',
+        why_subtitle: 'Oferim cea mai prestigioasă, sigură și confortabilă experiență de transfer VIP privat din Antalya',
+        why_feat_1_title: 'Serviciu de încredere 24/7',
+        why_feat_1_desc: 'La orice oră din zi sau din noapte, indiferent când aterizează zborul dumneavoastră, șoferul nostru amabil vă va aștepta.',
+        why_feat_2_title: 'Urmărire live a zborului',
+        why_feat_2_desc: 'Chiar dacă zborul are întârziere, monitorizăm programul după codul de zbor și ajustăm ora de preluare cu zero costuri suplimentare.',
+        why_feat_3_title: 'Întâmpinare cu tabelă',
+        why_feat_3_desc: 'Șoferul nostru vă întâmpină chiar la ieșirea din aeroport cu o tabelă cu numele dumneavoastră și vă ajută cu bagajele.',
+        why_feat_4_title: 'Prețuri fixe transparente',
+        why_feat_4_desc: 'Toate taxele de autostradă, tuneluri, parcări de aeroport și combustibilul sunt incluse în preț. Fără taxe ascunse.',
+        tours_title: 'Atracții și Destinații Populare în Antalya',
+        tours_subtitle: 'Explorați cele mai populare atracții turistice din Antalya și călătoriți în confort maxim cu serviciile noastre de transfer VIP.',
+        tour_btn_discover: 'Detalii Regiune',
+        tour_btn_book: 'Rezervă Transfer',
+        sidebar_title: 'Planificator de Tur Personalizat',
+        sidebar_empty: 'Nu ați adăugat nicio atracție încă. Alegeți destinații din cardurile de mai sus pentru a vă crea turul privat.',
+        sidebar_duration: 'Durată Estimată Tur',
+        sidebar_vehicle: 'Vehicul Preferat',
+        sidebar_price: 'Preț Total Tur',
+        sidebar_book: 'Rezervă Tur Privat Personalizat',
+        faq_title: 'Întrebări frecvente',
+        faq_subtitle: 'Aflați detalii despre procesul de rezervare, politica de anulare și facilitățile incluse',
+        faq_q1: 'Cum pot face o rezervare?',
+        faq_a1: 'Completați formularul rapid, faceți clic pe "Calculează Prețul", alegeți vehiculul VIP dorit și veți fi redirecționat către WhatsApp pentru a confirma instantaneu cu echipa noastră.',
+        faq_q2: 'Ce se întâmplă dacă zborul are întârziere? Voi plăti în plus?',
+        faq_a2: 'Nu, absolut nu. Monitorizăm zborul dumneavoastră live folosind codul de zbor și trimitem șoferul conform orei reale de aterizare. Nu există taxe de întârziere.',
+        faq_q3: 'Cum plătesc pentru transfer?',
+        faq_a3: 'Puteți plăti numerar direct șoferului în vehicul (Euro, Dolari, Lire) sau online securizat prin card de credit sau transfer bancar în momentul rezervării.',
+        faq_q4: 'Pot anula rezervarea?',
+        faq_a4: 'Da, anulările efectuate cu până la 24 de ore înainte de ora programată a transferului sunt complet gratuite.',
+        faq_q5: 'Sunt disponibile scaune pentru copii?',
+        faq_a5: 'Da, oferim scaune pentru bebeluși și scaune înălțătoare (booster) gratuit, la cerere. Pur și simplu specificați acest lucru în secțiunea de note a formularului.',
+        contact_title: 'Contactați-ne',
+        contact_subtitle: 'Suntem disponibili 24/7 pentru itinerarii de călătorie personalizate, evenimente sau întrebări',
+        contact_phone: 'Număr de Telefon / WhatsApp',
+        contact_address: 'Adresă Sediu Central',
+        contact_address_val: 'Güzelyurt Dist. 26220. St. No:20 Aksu / Antalya, Turcia',
+        hotel_rates_title: 'Tarife VIP Transfer la Hoteluri Populare de Lux',
+        hotel_rates_subtitle: 'Prețuri speciale fixe pentru transferuri VIP de la Aeroportul Antalya (AYT) la cele mai populare hoteluri de lux',
+        hotel_legends_desc: 'Transport la Rixos The Land of Legends & Theme Park',
+        hotel_maxx_desc: 'Transfer luks VIP la hotelul Maxx Royal Golf Resort & Spa',
+        hotel_regnum_desc: 'Transport VIP la Regnum Carya Golf & Luxury Resort',
+        hotel_delphin_desc: 'Transfer privat rapid în zona de hoteluri Kundu',
+        route_guide_title: 'Rute Populare VIP Transfer & Ghid de Călătorie',
+        route_guide_subtitle: 'Distanțe, durate și detalii de călătorie locale pentru cele mai solicitate rute VIP din Antalya',
+        route_belek_desc: 'Transferurile între Aeroportul Antalya și zona stațiunilor de lux din Belek durază aproximativ 30 de minute. Vehiculele noastre VIP utilizează autostrada principală pentru un tranzit lin.',
+        route_side_desc: 'Celebră pentru ruinele orașului antic și plajele sale, Side se află la 65 km de aeroport. Oferim transport VIP direct prin drumul național D400 în aproximativ 50 de minute.',
+        route_alanya_desc: 'Acoperind o regiune largă, inclusiv incekum, Avsallar, Konakli și Mahmutlar, călătoria spre Alanya are 125 km. Pe acest traseu mai lung, facilitățile noastre premium asigură o călătorie relaxantă.',
+        route_kemer_desc: 'Traseul Kemer are o distanță de 60 km între munții cu pini și coasta Mediteranei. Transferurile durează aproximativ 55 de minute în microbuzele noastre VIP de lux complet echipate.',
+        advisor_title: 'Ghid de Călătorie și Sfaturi Antalya',
+        advisor_subtitle: 'Informații utile despre transferul VIP în Antalya, legi de trafic și planificarea călătoriei',
+        advisor_art1_title: 'Este activ Uber în Antalya?',
+        advisor_art1_body: 'Serviciile globale de transport precum Uber nu funcționează independent în Antalya din cauza legilor locale de licențiere. Taxis galbene există, dar transferurile private VIP cu Mercedes Vito oferă tarife fixe și confort superior, fiind alegerea principală a turiștilor.',
+        advisor_art2_title: 'Sunt obligatorii scaunele de copii în Turcia?',
+        advisor_art2_body: 'Da, legile de siguranță rutieră din Turcia cer ca copiii să călătorească în scaune auto adecvate. Pentru siguranța familiei dumneavoastră, Mountain VIP Transfer oferă scaune auto igienizate gratuit.',
+        advisor_art3_title: 'Ce se întâmplă dacă zborul spre Antalya are întârziere?',
+        advisor_art3_body: 'Utilizăm urmărirea live prin radar pentru toate zborurile sosite la Aeroportul Antalya (AYT). Chiar dacă zborul are întârziere, șoferul dumneavoastră vă va aștepta la poarta de ieșire fără costuri suplimentare.',
+        map_title: 'Harta Traseului de Transfer în Direct',
+        map_subtitle: 'Vizualizarea în timp real a traseului pentru transferul selectat',
+        map_distance: 'Distanță',
+        map_duration: 'Durată Estimată',
+        map_pickup_lbl: 'Preluare (De la)',
+        map_dropoff_lbl: 'Destinație (Către)',
+        map_info_notice: 'Întâmpinarea gratuită, asistența pentru bagaje și urmărirea zborului sunt incluse.',
+        modal_book_title: 'Detalii Rezervare',
+        modal_name: 'Numele și Prenumele',
+        modal_phone: 'Numărul de Telefon (Compatibil WhatsApp)',
+        modal_email: 'Adresa de E-mail',
+        modal_flight: 'Cod Zbor (Ex: TK2410)',
+        modal_notes: 'Cereri Speciale / Note (Ex: scaun bebeluș)',
+        modal_submit: 'Confirmă Rezervarea prin WhatsApp',
+        success_title: 'Felicitări!',
+        success_msg: 'Detaliile rezervării au fost pregătite. Veți fi redirecționat către WhatsApp pentru a trimite solicitarea...',
+        success_btn_close: 'Închide',
+        success_summary_title: 'Rezumat Rezervare',
+        success_type: 'Tip Serviciu',
+        success_type_transfer: 'Transfer Aeroport VIP',
+        success_type_tour: 'Tur Cultural Privat VIP',
+        success_route: 'Traseu / Opriri',
+        success_date: 'Data & Ora',
+        success_pax: 'Număr Pasageri',
+        success_vehicle: 'Vehicul Selectat',
+        success_total: 'Preț Total Estimat',
+        kvkk_checkbox_label: 'Am citit și sunt de acord cu <a href="#" class="kvkk-link" style="color: var(--accent-gold); text-decoration: underline; font-weight: 600;">Politica de Confidențialitate</a>.',
+        kvkk_modal_title: 'Politica de Confidențialitate',
+        cookie_text: 'Folosim cookie-uri pentru a vă îmbunătăți experiența. Continuând să navigați pe site-ul nostru, sunteți de acord cu politica noastră.',
+        cookie_accept: 'Acceptă',
+        how_title: 'Cum Funcționează?',
+        how_subtitle: 'Rezervare de Transfer VIP Sigură și Confortabilă în 4 Pași Simpli',
+        step1_title: 'Rezervare Online',
+        step1_desc: 'Selectați traseul și data pentru a calcula prețul pe site, rezervați instantaneu prin formular sau WhatsApp.',
+        step2_title: 'Urmărirea Zborului',
+        step2_desc: 'Echipa noastră monitorizează codul de zbor și actualizează gratuit ora de preluare în caz de întârzieri.',
+        step3_title: 'Întâmpinare cu Nume',
+        step3_desc: 'Șoferul vă întâmpină la poarta de ieșire cu o tabelă cu numele dumneavoastră sau sigla Mountain VIP.',
+        step4_title: 'Plată Ușoară în Mașină',
+        step4_desc: 'Rezervați fără plată în avans. Finalizați plata direct la șofer la sfârșitul călătoriei.',
+        corp_title: 'Servicii VIP Corporate & Speciale',
+        corp_subtitle: 'Soluții de Transport de Lux pentru Companii, Evenimente, Nunți și Protocol',
+        corp_s1_title: 'Transferuri Corporate & Delegații',
+        corp_s1_desc: 'Coordonare personalizată a flotei pentru congrese, întâlniri și evenimente corporate cu Vito & Sprinter.',
+        corp_s1_f1: 'Managementul Transferurilor de Grup',
+        corp_s1_f2: 'Facturare B2B Lunară',
+        corp_s1_f3: 'Suport Dedicat 24/7',
+        corp_s2_title: 'Protocol & Închiriere cu Șofer',
+        corp_s2_desc: 'Închirieri auto zilnice cu șoferi profesioniști multilingvi, la costum, pentru lideri de afaceri și VIP-uri.',
+        corp_s2_f1: 'Șoferi Multilingvi la Costum',
+        corp_s2_f2: 'Confidențialitate Totală & Protocoale de Sigranță',
+        corp_s2_f3: 'Opțiune de Perete Separator VIP',
+        corp_s3_title: 'Nunți & Evenimente Speciale VIP',
+        corp_s3_desc: 'Transferuri elegante pentru miri, decorațiuni florale VIP și pachete de ospitalitate pentru zile speciale.',
+        corp_s3_f1: 'Decorarea Vehiculului cu Flori',
+        corp_s3_f2: 'Gazde Dedicate pentru Întâmpinare',
+        corp_s3_f3: 'Coordonarea Traseelor cu Opriri Multiple',
+        corp_btn_contact: 'Aplică Acum',
+        preloader_text: 'Se încarcă experiența VIP...',
+        slide2_badge: 'Mercedes Vito & Sprinter',
+        slide2_title: 'Transfer cu <span>Confort Premium</span><br>în orice punct din Antalya',
+        slide2_desc: 'Oferim servicii de transfer sigure și de lux către Belek, Side, Alanya, Kemer și toate regiunile cu vehiculele noastre Mercedes Vito și Sprinter de ultimă generație.',
+        slide2_feat_1: 'Scaune de Confort Reclinabile',
+        slide2_feat_2: 'Wi-Fi Gratuit',
+        slide2_feat_3: 'Aer Condiționat & Climatizare',
+        slide3_badge: 'VIP Corporate & Protocol',
+        slide3_title: 'O Experiență <span>Unică</span><br>în Transferul Corporate',
+        slide3_desc: 'Partenerul dumneavoastră de încredere pentru întâlniri, congrese și transferuri de protocol. Suntem mereu alături de dumneavoastră cu șoferi profesioniști și o flotă de lux.',
+        slide3_feat_1: 'Șoferi Profesioniști',
+        slide3_feat_2: 'Facturare Corporate',
+        slide3_feat_3: 'Suport 24/7',
+        slide4_badge: 'Nunți & Evenimente Speciale',
+        slide4_title: 'O Călătorie <span>De Neuitat</span><br>în Zilele Dumneavoastră Speciale',
+        slide4_desc: 'Pentru nunți, logodne și evenimente, transformăm momentele în amintiri eterne cu vehiculele noastre decorate cu flori și servicii VIP de întâmpinare.',
+        slide4_feat_1: 'Vehicul Decorat cu Flori',
+        slide4_feat_2: 'Întâmpinare VIP',
+        slide4_feat_3: 'Serviciu de Șampanie',
+        vehicle_label_0: 'Mercedes Vito VIP',
+        vehicle_label_1: 'Mercedes Vito Premium',
+        vehicle_label_2: 'Mercedes Sprinter VIP',
+        vehicle_label_3: 'VIP Nunți & Evenimente Speciale',
+        brochures_header: 'Standardele Noastre de Serviciu & Broșuri',
+        brochures_sub: 'Sunteți în siguranță cu noi! Puteți consulta broșurile noastre detaliate pentru o experiență de transfer VIP dincolo de standarde.',
+        brochure_1_title: 'În Siguranță Cu Noi',
+        brochure_1_text: 'Sunteți în siguranță cu Wi-Fi gratuit, băuturi răcoritoare, tarife fixe transparente și urmărire în timp real a zborului.',
+        brochure_2_title: 'Dincolo de Standarde',
+        brochure_2_text: 'Transport VIP igienic și confortabil către aeroporturi, hoteluri, vile private și adrese specifice.',
+        pricing_title: 'Tarife Regionale Transfer',
+        pricing_subtitle: 'De la Aeroportul Antalya (AYT) · Pe vehicul · Tarife fixe all-inclusive',
+        pricing_note: 'Reducere de 10% la rezervările dus-întors · Toate prețurile sunt pe vehicul, nu pe persoană',
+        pricing_destination: 'Destinație',
+        step3_guide_btn: 'Vezi Ghid de Întâmpinare',
+        video_title: 'Experiența de Călătorie Mountain VIP',
+        video_subtitle: 'Urmăriți flota noastră premium, întâmpinarea personalizată la aeroport și standardele noastre la bord.'
+    },
 };
 
 // --- Internationalization Currency & Helpers ---
@@ -1037,6 +1231,10 @@ const seoMetaData = {
     ru: {
         title: "Mountain VIP Transfer | VIP трансфер Анталья Аэропорт | Люкс такси",
         desc: "Mountain VIP Transfer - Круглосуточный VIP трансфер на Mercedes Vito и Sprinter в Анталье (Белек, Сиде, Аланья, Кемер). Фиксированные цены, встреча в аэропорту."
+    },
+    ro: {
+        title: "Mountain VIP Transfer | Servicii de Transfer VIP de Lux Aeroport Antalya",
+        desc: "Mountain VIP Transfer - Servicii private de transfer aeroport VIP 24/7 cu Mercedes Vito și Sprinter în Antalya (Belek, Side, Alanya, Kemer). Tarife fixe, urmărire zbor."
     }
 };
 
@@ -1068,6 +1266,13 @@ const testimonialsData = {
         { name: "Kemal A. 🇹🇷", country: "Стамбул, Турция", text: "Antalya Havalimanından Kundu otelimize yaptığımız transferde güler yüzlü karşılama ve vaktinde ulaşım çok iyiydi. Vito araç içi tasarımı harikaydı." },
         { name: "Hans M. 🇩🇪", country: "Гамбург, Германия", text: "Ausgezeichneter Service! Der Fahrer wartete pünktlich am Flughafen Antalya mit unserem Namensschild. Die Mercedes Vito war sauber und luxuriös." },
         { name: "Анна К. 🇷🇺", country: "Казань, РФ", text: "Ездили большой группой на Спринтере до Кемера. Салон шикарный, кондиционер работал отлично, доехали с комфортом." }
+    ],
+    ro: [
+        { name: "Andrei M. 🇷🇴", country: "București, România", text: "Serviciu excelent! Șoferul ne-a așteptat la timp la aeroportul din Antalya cu o tabelă cu numele nostru. Mercedes Vito a fost curat și foarte confortabil." },
+        { name: "Elena R. 🇷🇴", country: "Cluj-Napoca, România", text: "Recomand! Am comandat un transfer VIP pentru o familie cu doi copii, scaunele de copii au fost instalate gratuit. Șoferul a fost foarte amabil." },
+        { name: "Hans M. 🇩🇪", country: "Hamburg, Germania", text: "Ausgezeichneter Service! Der Fahrer wartete pünktlich am Flughafen Antalya mit unserem Namensschild. Die Mercedes Vito war sauber und luxuriös." },
+        { name: "Sarah B. 🇬🇧", country: "Londra, Marea Britanie", text: "Incredible VIP service! The Mercedes Vito was immaculate, driver was waiting at AYT Airport with a name sign. 5 stars." },
+        { name: "Dmitry S. 🇷🇺", country: "Moscova, Rusia", text: "Прекрасный VIP-трансфер! Чистый мерседес вито, детское кресло предоставили бесплатно. Водитель вежливый, помог с багажом." }
     ]
 };
 
@@ -1234,7 +1439,8 @@ function updatePromoBanner() {
         tr: `⭐ ÜCRETSİZ İPTAL &amp; ARAÇTA NAKİT ÖDEME | ${w.ayt.icon} Antalya: ${w.ayt.temp}°C | ${w.aln.icon} Alanya: ${w.aln.temp}°C ⭐`,
         en: `⭐ FREE CANCELLATION &amp; PAY CASH | ${w.ayt.icon} Antalya: ${w.ayt.temp}°C | ${w.aln.icon} Alanya: ${w.aln.temp}°C ⭐`,
         de: `⭐ KOSTENLOSE STORNIERUNG &amp; BARZAHLUNG | ${w.ayt.icon} Antalya: ${w.ayt.temp}°C | ${w.aln.icon} Alanya: ${w.aln.temp}°C ⭐`,
-        ru: `⭐ БЕСПЛАТНАЯ ОТМЕНА И ОПЛАТА В МАШИНЕ | ${w.ayt.icon} Анталья: ${w.ayt.temp}°C | ${w.aln.icon} Аланья: ${w.aln.temp}°C ⭐`
+        ru: `⭐ БЕСПЛАТНАЯ ОТМЕНА И ОПЛАТА В МАШИНЕ | ${w.ayt.icon} Анталья: ${w.ayt.temp}°C | ${w.aln.icon} Аланья: ${w.aln.temp}°C ⭐`,
+        ro: `⭐ ANULARE GRATUITĂ ȘI PLATĂ ÎN MAȘINĂ | ${w.ayt.icon} Antalya: ${w.ayt.temp}°C | ${w.aln.icon} Alanya: ${w.aln.temp}°C ⭐`
     };
     
     banner.innerHTML = messages[lang] || messages.en;
@@ -1248,7 +1454,8 @@ function updatePromoBanner() {
             tr: `Antalya: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Güneşli' : 'Açık'} — VIP seyahatiniz için harika bir gün!`,
             en: `Antalya: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Sunny' : 'Clear'} — A beautiful day for your VIP transfer!`,
             de: `Antalya: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Sonnig' : 'Klar'} — Ein schöner Tag für Ihren VIP-Transfer!`,
-            ru: `Анталья: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Ясно' : 'Солнечно'} — Отличный день для вашего VIP-трансфера!`
+            ru: `Анталья: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Ясно' : 'Солнечно'} — Отличный день для вашего VIP-трансфера!`,
+            ro: `Antalya: ${w.ayt.temp}°C ${w.ayt.icon === '☀️' ? 'Însorit' : 'Senin'} — O zi minunată pentru transferul tău VIP!`
         };
         weatherTextLive.innerText = weatherGreetingMessages[lang] || weatherGreetingMessages.en;
     }
@@ -1311,8 +1518,8 @@ function updateWhatsAppWidgetLink() {
     if (!btn) return;
     
     const lang = state.currentLang;
-    const pickupLocName = state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? locations[state.pickup][lang] : '');
-    const dropoffLocName = state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? locations[state.dropoff][lang] : '');
+    const pickupLocName = state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? (locations[state.pickup][lang] || locations[state.pickup].en || locations[state.pickup].tr) : '');
+    const dropoffLocName = state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? (locations[state.dropoff][lang] || locations[state.dropoff].en || locations[state.dropoff].tr) : '');
     const pax = state.passengers || '1';
     
     let text = '';
@@ -1322,6 +1529,8 @@ function updateWhatsAppWidgetLink() {
         text = `Hallo Mountain VIP, ich möchte VIP-Transfer-Details und Preisinformationen für ${pax} Personen von ${pickupLocName} nach ${dropoffLocName} erhalten.`;
     } else if (lang === 'ru') {
         text = `Здравствуйте, Mountain VIP! Я хочу узнать информацию о ценах на VIP-трансфер для ${pax} человек из ${pickupLocName} в ${dropoffLocName}.`;
+    } else if (lang === 'ro') {
+        text = `Bună ziua, Mountain VIP! Aș dori să primesc detalii despre transferul VIP și prețul pentru ${pax} persoane de la ${pickupLocName} la ${dropoffLocName}.`;
     } else {
         text = `Hello Mountain VIP, I would like to get VIP transfer details and pricing for ${pax} people from ${pickupLocName} to ${dropoffLocName}.`;
     }
@@ -1367,7 +1576,7 @@ function setLanguage(lang) {
     const flagEl = document.getElementById('active-flag');
     const langEl = document.getElementById('active-lang');
     if (flagEl && langEl) {
-        const flagMap = { tr: '🇹🇷', en: '🇬🇧', de: '🇩🇪', ru: '🇷🇺' };
+        const flagMap = { tr: '🇹🇷', en: '🇬🇧', de: '🇩🇪', ru: '🇷🇺', ro: '🇷🇴' };
         flagEl.innerText = flagMap[lang] || '🇬🇧';
         langEl.innerText = lang.toUpperCase();
     }
@@ -1832,22 +2041,23 @@ function showGroupedSuggestions(query, box, hiddenInput, searchInput) {
 
         const header = document.createElement('div');
         header.className = 'suggestion-group-header';
-        header.innerText = group[lang];
+        header.innerText = group[lang] || group.en;
         box.appendChild(header);
 
         group.items.forEach(item => {
             totalFound++;
             const itemDiv = document.createElement('div');
             itemDiv.className = 'suggestion-item';
+            const nameVal = item[lang] || item.en;
             itemDiv.innerHTML = `
                 <i class="fas ${item.type === 'airport' ? 'fa-plane' : 'fa-map-marker-alt'}"></i>
                 <div class="suggestion-item-text">
-                    <span class="suggestion-name">${item[lang]}</span>
+                    <span class="suggestion-name">${nameVal}</span>
                 </div>
             `;
 
             itemDiv.addEventListener('click', () => {
-                searchInput.value = item[lang];
+                searchInput.value = nameVal;
                 hiddenInput.value = item.id;
                 box.classList.remove('active');
 
@@ -1944,14 +2154,14 @@ function applyTranslations() {
         if (state.pickup.startsWith('custom_')) {
             pickupSearch.value = state.pickup.replace('custom_', '');
         } else if (locations[state.pickup]) {
-            pickupSearch.value = locations[state.pickup][lang];
+            pickupSearch.value = locations[state.pickup][lang] || locations[state.pickup].en;
         }
     }
     if (dropoffSearch && state.dropoff) {
         if (state.dropoff.startsWith('custom_')) {
             dropoffSearch.value = state.dropoff.replace('custom_', '');
         } else if (locations[state.dropoff]) {
-            dropoffSearch.value = locations[state.dropoff][lang];
+            dropoffSearch.value = locations[state.dropoff][lang] || locations[state.dropoff].en;
         }
     }
     
@@ -2019,7 +2229,7 @@ function renderFleetCards() {
         const card = document.createElement('div');
         card.className = 'fleet-card';
         
-        const amenitiesHTML = vehicle.amenities[lang].map(item => `
+        const amenitiesHTML = (vehicle.amenities[lang] || vehicle.amenities.en || vehicle.amenities.tr).map(item => `
             <div class="fleet-feature-item">
                 <i class="fas fa-check-circle"></i>
                 <span>${item}</span>
@@ -2089,8 +2299,8 @@ window.selectRouteInWidget = function(pickupId, dropoffId) {
             dropoffInput.value = dropoffId;
             
             const lang = state.currentLang;
-            if (pickupSearch) pickupSearch.value = pLoc[lang];
-            if (dropoffSearch) dropoffSearch.value = dLoc[lang];
+            if (pickupSearch) pickupSearch.value = pLoc[lang] || pLoc.en;
+            if (dropoffSearch) dropoffSearch.value = dLoc[lang] || dLoc.en;
             
             // Re-calculate and render fleet grid prices
             renderFleetCards();
@@ -2115,7 +2325,7 @@ window.quickSelectHotel = function(hotelName, regionId) {
         dropoffInput.value = regionId;
         
         const lang = state.currentLang;
-        if (pickupSearch) pickupSearch.value = locations['ayt'] ? locations['ayt'][lang] : 'Antalya Airport (AYT)';
+        if (pickupSearch) pickupSearch.value = locations['ayt'] ? (locations['ayt'][lang] || locations['ayt'].en) : 'Antalya Airport (AYT)';
         if (dropoffSearch) dropoffSearch.value = hotelName;
         
         // Auto select tab to transfer just in case
@@ -2158,12 +2368,12 @@ function renderSightCards() {
         
         card.innerHTML = `
             <div class="sight-img-wrap">
-                <img src="${sight.img}" alt="${sight.names[lang]}" loading="lazy">
+                <img src="${sight.img}" alt="${sight.names[lang] || sight.names.en}" loading="lazy">
             </div>
             <div class="sight-info" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                 <div>
-                    <h3 class="sight-title">${sight.names[lang]}</h3>
-                    <p class="sight-desc" style="margin-bottom: 1.2rem;">${sight.descriptions[lang]}</p>
+                    <h3 class="sight-title">${sight.names[lang] || sight.names.en}</h3>
+                    <p class="sight-desc" style="margin-bottom: 1.2rem;">${sight.descriptions[lang] || sight.descriptions.en}</p>
                 </div>
                 <div class="sight-actions" style="display: flex; gap: 0.8rem; margin-top: auto;">
                     <button class="btn btn-secondary" onclick="openSightDetails('${id}')" style="flex: 1; padding: 0.5rem 0.6rem; font-size: 0.8rem;">${dict.tour_btn_discover}</button>
@@ -2210,7 +2420,7 @@ function renderRegionsList() {
                     <span class="region-sub-badge" 
                           style="display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; padding: 0.5rem 0.8rem; cursor: pointer; transition: var(--transition-smooth);" 
                           onclick="selectRouteInWidget('ayt', '${locId}')">
-                        <span style="font-weight: 600;">${loc[lang]}</span>
+                        <span style="font-weight: 600;">${loc[lang] || loc.en}</span>
                         <span style="font-size: 0.72rem; color: var(--accent-gold-hover); font-weight: 700;">
                             <i class="fas fa-route" style="font-size: 0.68rem; margin-right: 0.1rem;"></i> ${label}
                         </span>
@@ -2224,7 +2434,7 @@ function renderRegionsList() {
         regCard.className = 'region-card';
 
         regCard.innerHTML = `
-            <h3 class="region-card-title"><i class="fas fa-map-marked-alt"></i> ${titles[lang]}</h3>
+            <h3 class="region-card-title"><i class="fas fa-map-marked-alt"></i> ${titles[lang] || titles.en}</h3>
             <div class="region-sub-list">
                 ${subItemsHTML}
             </div>
@@ -2278,7 +2488,7 @@ function updateTourCartUI() {
         const item = document.createElement('li');
         item.className = 'tour-cart-item';
         item.innerHTML = `
-            <span class="tour-cart-item-name">${sight.names[lang]}</span>
+            <span class="tour-cart-item-name">${sight.names[lang] || sight.names.en}</span>
             <button class="tour-cart-item-remove" onclick="toggleSightInTour('${id}')"><i class="fas fa-trash"></i></button>
         `;
         cartList.appendChild(item);
@@ -2319,12 +2529,12 @@ function openSightDetails(sightId) {
     
     if (!modal || !modalTitle || !modalBody) return;
     
-    modalTitle.innerHTML = sight.names[lang];
+    modalTitle.innerHTML = sight.names[lang] || sight.names.en;
     modalBody.innerHTML = `
         <div class="detail-modal-img">
-            <img src="${sight.img}" alt="${sight.names[lang]}">
+            <img src="${sight.img}" alt="${sight.names[lang] || sight.names.en}">
         </div>
-        <p class="detail-modal-desc">${sight.descriptions[lang]}</p>
+        <p class="detail-modal-desc">${sight.descriptions[lang] || sight.descriptions.en}</p>
         <div class="detail-modal-meta">
             <div class="meta-item">
                 <div class="meta-item-label">${lang === 'tr' ? 'Önerilen Süre' : 'Recommended Stay'}</div>
@@ -2351,8 +2561,8 @@ function updateModalTripSummary() {
     const modalPickup = document.getElementById('modal-pickup');
     const modalDropoff = document.getElementById('modal-dropoff');
     
-    const pickupName = modalPickup && modalPickup.value.trim() ? modalPickup.value.trim() : (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? locations[state.pickup][lang] : state.pickup));
-    const dropoffName = modalDropoff && modalDropoff.value.trim() ? modalDropoff.value.trim() : (state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? locations[state.dropoff][lang] : state.dropoff));
+    const pickupName = modalPickup && modalPickup.value.trim() ? modalPickup.value.trim() : (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? (locations[state.pickup][lang] || locations[state.pickup].en) : state.pickup));
+    const dropoffName = modalDropoff && modalDropoff.value.trim() ? modalDropoff.value.trim() : (state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? (locations[state.dropoff][lang] || locations[state.dropoff].en) : state.dropoff));
     
     const vehicle = vehicles[state.vehicleType];
     const vehicleName = vehicle ? vehicle.name : state.vehicleType;
@@ -2402,8 +2612,8 @@ function openBookingModal(type, vehicleId) {
             const lang = state.currentLang;
             const pLoc = locations[state.pickup];
             const dLoc = locations[state.dropoff];
-            modalPickup.value = pLoc ? pLoc[lang] : (state.pickup || '');
-            modalDropoff.value = dLoc ? dLoc[lang] : (state.dropoff || '');
+            modalPickup.value = pLoc ? (pLoc[lang] || pLoc.en) : (state.pickup || '');
+            modalDropoff.value = dLoc ? (dLoc[lang] || dLoc.en) : (state.dropoff || '');
         }
 
         // Reset modal fields
@@ -2578,18 +2788,18 @@ function handleBookingSubmit(e) {
     
     if (state.bookingType === 'transfer') {
         serviceType = state.isRoundTrip ? (lang === 'tr' ? 'Gidiş-Dönüş VIP Transfer' : 'Round-Trip VIP Transfer') : dict.success_type_transfer;
-        const pickupName = finalPickupVal || (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? locations[state.pickup][lang] : state.pickup));
-        const dropoffName = finalDropoffVal || (state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? locations[state.dropoff][lang] : state.dropoff));
+        const pickupName = finalPickupVal || (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? (locations[state.pickup][lang] || locations[state.pickup].en) : state.pickup));
+        const dropoffName = finalDropoffVal || (state.dropoff.startsWith('custom_') ? state.dropoff.replace('custom_', '') : (locations[state.dropoff] ? (locations[state.dropoff][lang] || locations[state.dropoff].en) : state.dropoff));
         route = `${pickupName} ➔ ${dropoffName}`;
         totalFare = calculateTransferFare(state.pickup, state.dropoff, state.vehicleType);
     } else if (state.bookingType === 'hourly') {
         serviceType = lang === 'tr' ? 'Saatlik VIP Şoför Kiralama' : 'VIP Chauffeur Hourly Booking';
-        const pickupName = finalPickupVal || (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? locations[state.pickup][lang] : state.pickup));
+        const pickupName = finalPickupVal || (state.pickup.startsWith('custom_') ? state.pickup.replace('custom_', '') : (locations[state.pickup] ? (locations[state.pickup][lang] || locations[state.pickup].en) : state.pickup));
         route = `${pickupName} (${state.hourlyDuration} Saat / Hours)`;
         totalFare = calculateTransferFare(state.pickup, state.dropoff, state.vehicleType);
     } else {
         serviceType = dict.success_type_tour;
-        const sightNames = state.selectedSights.map(id => sights[id].names[lang]);
+        const sightNames = state.selectedSights.map(id => sights[id].names[lang] || sights[id].names.en);
         route = sightNames.join(', ');
         const tourCost = calculateTourPricing(state.selectedSights, state.vehicleType);
         totalFare = tourCost.price;
@@ -3613,6 +3823,15 @@ function initFomoNotifications() {
             { text: "Пассажир из Великобритании только что завершил трансфер из аэропорта.", icon: "fa-check-circle" },
             { text: "Семья из 4 человек из Мюнхена успешно прибыла в отель на VIP Vito.", icon: "fa-users" },
             { text: "Встреча в аэропорту успешно завершена для гостя из Лондона.", icon: "fa-handshake" }
+        ],
+        ro: [
+            { text: "3 transferuri VIP Vito către Belek rezervate în ultima oră.", icon: "fa-calendar-check" },
+            { text: "Un oaspete din Marea Britanie tocmai și-a finalizat transferul de la aeroport.", icon: "fa-check-circle" },
+            { text: "O familie de 4 persoane din München a sosit în siguranță la hotel cu VIP Vito.", icon: "fa-users" },
+            { text: "Întâmpinarea la aeroport a fost finalizată cu succes pentru un pasager din Londra.", icon: "fa-handshake" },
+            { text: "Un transfer dus-întors de la Alanya la Kaș a fost rezervat cu VIP Vito.", icon: "fa-route" },
+            { text: "Serviciul de șofer VIP de 8 ore a început pentru un client corporate.", icon: "fa-clock" },
+            { text: "Oaspeții din Moscova au plecat spre hotelul lor în Premium VIP Vito.", icon: "fa-crown" }
         ]
     };
 
