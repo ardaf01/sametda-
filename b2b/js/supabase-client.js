@@ -4,8 +4,8 @@
 
 // ⚠️ Geliştirici Notu: Supabase Panelinizden aldığınız değerleri buraya yapıştırın.
 // Supabase Dashboard -> Settings -> API -> Project API Keys
-const SUPABASE_URL = "https://your-project-url.supabase.co"; 
-const SUPABASE_ANON_KEY = "your-anon-key-here";
+const SUPABASE_URL = "https://arefratllhbrwykxcmzj.supabase.co"; 
+const SUPABASE_ANON_KEY = "sb_publishable_1ie4Ha044fp3BjuD-rv31Q_TTjhhdYu";
 
 let supabase;
 
