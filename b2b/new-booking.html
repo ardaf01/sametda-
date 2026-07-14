@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain VIP Transfer - B2B Yeni Rezervasyon</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../assets/logo.png" alt="Mountain VIP">
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html" class="sidebar-link">
+                        <i class="fas fa-th-large"></i>
+                        <span>Panel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="new-booking.html" class="sidebar-link active">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Yeni Rezervasyon</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bookings.html" class="sidebar-link">
+                        <i class="fas fa-list-ul"></i>
+                        <span>Rezervasyonlarım</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" onclick="logoutUser(); return false;" class="sidebar-link" style="color: var(--danger-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Content Header Bar -->
+            <header class="content-header">
+                <div class="page-title">
+                    <h1>Yeni Rezervasyon</h1>
+                    <p>Müşterileriniz için hızlı transfer rezervasyonu oluşturun.</p>
+                </div>
+                <div class="user-profile-menu" id="user-profile-menu">
+                    <div class="spinner" style="width: 20px; height: 20px; border-width: 2px;"></div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                
+                <!-- Left area: Booking Form -->
+                <div class="card" style="margin-bottom: 0;">
+                    <h2>Rezervasyon Detayları</h2>
+                    
+                    <div id="alert-container"></div>
+                    
+                    <form id="booking-form">
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <!-- Passenger Name -->
+                            <div class="form-group">
+                                <label class="form-label" for="passenger_name">Yolcu Adı / Soyadı</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="passenger_name" class="form-control" placeholder="Örn: John Smith" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Flight Number -->
+                            <div class="form-group">
+                                <label class="form-label" for="flight_number">Uçuş Numarası (Varsa)</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <input type="text" id="flight_number" class="form-control" placeholder="Örn: TK-2412" style="text-transform: uppercase;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                            <!-- Pax (Passengers Count) -->
+                            <div class="form-group">
+                                <label class="form-label" for="pax">Kişi Sayısı (Pax)</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-users" style="left:0.8rem;"></i>
+                                    <select id="pax" class="form-control form-select-custom" style="padding-left: 2.2rem;" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3" selected>3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Luggage -->
+                            <div class="form-group">
+                                <label class="form-label" for="luggage">Valiz Adedi</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-suitcase" style="left:0.8rem;"></i>
+                                    <select id="luggage" class="form-control form-select-custom" style="padding-left: 2.2rem;" required>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3" selected>3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle type selection -->
+                            <div class="form-group">
+                                <label class="form-label" for="vehicle_type">Araç Tipi</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-car" style="left:0.8rem;"></i>
+                                    <select id="vehicle_type" class="form-control form-select-custom" style="padding-left: 2.2rem;" required>
+                                        <option value="vito" selected>VIP Vito (1-6 Pax)</option>
+                                        <option value="vito_premium">Premium Vito (1-4 Pax)</option>
+                                        <option value="sprinter">VIP Sprinter (1-13 Pax)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <!-- Pickup Location -->
+                            <div class="form-group">
+                                <label class="form-label" for="pickup_location">Alış Noktası (Nereden)</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-map-marker-alt" style="left:0.8rem;"></i>
+                                    <select id="pickup_location" class="form-control form-select-custom" style="padding-left: 2.2rem;" required>
+                                        <!-- Loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Dropoff Location -->
+                            <div class="form-group">
+                                <label class="form-label" for="dropoff_location">İniş Noktası (Nereye)</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-flag-checkered" style="left:0.8rem;"></i>
+                                    <select id="dropoff_location" class="form-control form-select-custom" style="padding-left: 2.2rem;" required>
+                                        <!-- Loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <!-- Pickup Date -->
+                            <div class="form-group">
+                                <label class="form-label" for="pickup_date">Tarih</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-calendar"></i>
+                                    <input type="date" id="pickup_date" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Pickup Time -->
+                            <div class="form-group">
+                                <label class="form-label" for="pickup_time">Saat</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-clock"></i>
+                                    <input type="time" id="pickup_time" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Special Notes -->
+                        <div class="form-group">
+                            <label class="form-label" for="notes">Özel İstekler / Notlar</label>
+                            <textarea id="notes" class="form-control" placeholder="Örn: Bebek koltuğu, tekerlekli sandalye vb. notlar..." style="padding-left: 1rem; height: 80px; resize: none;"></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-booking-btn" class="btn-gold" style="margin-top: 1rem;">
+                            <i class="fas fa-paper-plane"></i> Rezervasyonu Tamamla
+                        </button>
+
+                    </form>
+                </div>
+
+                <!-- Right area: Price Summary Preview Card -->
+                <div>
+                    <div class="card" style="background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); border-color: var(--accent-gold); box-shadow: var(--gold-shadow);">
+                        <h2>Fiyat Özeti</h2>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                            <!-- Standard Retail Price -->
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.8rem;">
+                                <span style="color: var(--text-secondary); font-size: 0.9rem;">Standart Liste Fiyatı</span>
+                                <span id="summary-base-price" style="font-weight: 600; text-decoration: line-through; color: var(--text-muted);">€0.00</span>
+                            </div>
+                            
+                            <!-- Agency Discount Percentage -->
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.8rem;">
+                                <span style="color: var(--text-secondary); font-size: 0.9rem;">Acente İndirim Oranı</span>
+                                <span id="summary-discount" style="font-weight: 700; color: var(--success-color);">-%0.00</span>
+                            </div>
+                            
+                            <!-- Net Agency Price -->
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: 600; font-size: 1.1rem;">Acente Net Tutar</span>
+                                <span id="summary-net-price" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-gold);">€0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h2>Kredi &amp; Limit Durumu</h2>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: var(--text-secondary);">Kalan Kredi Limiti:</span>
+                                <span id="credit-limit-val" style="font-weight: 600;">€0.00</span>
+                            </div>
+                            <div id="limit-warning" class="alert alert-danger" style="display: none; padding: 0.6rem 0.8rem; margin: 0.5rem 0 0 0; font-size: 0.75rem;">
+                                <i class="fas fa-exclamation-triangle"></i> Yetersiz limit! Lütfen ödeme yapın.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Config, locations array metadata, and actions scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        // locations array from app.js
+        const locations = {
+            ayt: { tr: 'Antalya Havalimanı (AYT)', en: 'Antalya Airport (AYT)', distFromAyt: 0, distFromGzp: 170, type: 'airport' },
+            gzp: { tr: 'Gazipaşa Havalimanı (GZP)', en: 'Gazipaşa Airport (GZP)', distFromAyt: 170, distFromGzp: 0, type: 'airport' },
+            kaleici: { tr: 'Kaleiçi (Antalya Merkez)', en: 'Kaleiçi (Old Town)', distFromAyt: 15, distFromGzp: 175, region: 'center' },
+            kepez: { tr: 'Kepez', en: 'Kepez', distFromAyt: 15, distFromGzp: 180, region: 'center' },
+            muratpasa: { tr: 'Muratpaşa', en: 'Muratpaşa', distFromAyt: 12, distFromGzp: 172, region: 'center' },
+            aksu: { tr: 'Aksu', en: 'Aksu', distFromAyt: 10, distFromGzp: 165, region: 'center' },
+            lara: { tr: 'Lara', en: 'Lara', distFromAyt: 15, distFromGzp: 168, region: 'center' },
+            kundu: { tr: 'Kundu', en: 'Kundu', distFromAyt: 20, distFromGzp: 165, region: 'center' },
+            konyaalti: { tr: 'Konyaaltı', en: 'Konyaaltı', distFromAyt: 25, distFromGzp: 185, region: 'center' },
+            belek: { tr: 'Belek (Merkez)', en: 'Belek (Center)', distFromAyt: 35, distFromGzp: 145, region: 'belek' },
+            kadriye: { tr: 'Kadriye (Belek)', en: 'Kadriye (Belek)', distFromAyt: 30, distFromGzp: 150, region: 'belek' },
+            serik: { tr: 'Serik', en: 'Serik', distFromAyt: 35, distFromGzp: 145, region: 'belek' },
+            bogazkent: { tr: 'Boğazkent (Belek)', en: 'Boğazkent (Belek)', distFromAyt: 40, distFromGzp: 140, region: 'belek' },
+            ilica: { tr: 'Ilıca (Side)', en: 'Ilıca (Side)', distFromAyt: 60, distFromGzp: 115, region: 'side' },
+            kumkoy: { tr: 'Kumköy (Side)', en: 'Kumköy (Side)', distFromAyt: 62, distFromGzp: 113, region: 'side' },
+            evrenseki: { tr: 'Evrenseki (Side)', en: 'Evrenseki (Side)', distFromAyt: 60, distFromGzp: 115, region: 'side' },
+            gundogdu: { tr: 'Gündoğdu (Side)', en: 'Gündoğdu (Side)', distFromAyt: 55, distFromGzp: 120, region: 'side' },
+            colakli: { tr: 'Çolaklı (Side)', en: 'Çolaklı (Side)', distFromAyt: 53, distFromGzp: 122, region: 'side' },
+            denizyaka: { tr: 'Denizyaka (Side)', en: 'Denizyaka (Side)', distFromAyt: 48, distFromGzp: 127, region: 'side' },
+            sorgun: { tr: 'Sorgun (Side)', en: 'Sorgun (Side)', distFromAyt: 68, distFromGzp: 107, region: 'side' },
+            titreyengol: { tr: 'Titreyengöl (Side)', en: 'Titreyengöl (Side)', distFromAyt: 70, distFromGzp: 105, region: 'side' },
+            cenger: { tr: 'Çenger (Manavgat)', en: 'Çenger (Manavgat)', distFromAyt: 85, distFromGzp: 90, region: 'manavgat' },
+            kizilagac: { tr: 'Kızılağaç (Manavgat)', en: 'Kızılağaç (Manavgat)', distFromAyt: 80, distFromGzp: 95, region: 'manavgat' },
+            kizilot: { tr: 'Kızılot (Manavgat)', en: 'Kızılot (Manavgat)', distFromAyt: 83, distFromGzp: 92, region: 'manavgat' },
+            cikcilli: { tr: 'Cikcilli (Alanya)', en: 'Cikcilli (Alanya)', distFromAyt: 125, distFromGzp: 40, region: 'alanya' },
+            incekum: { tr: 'İncekum (Alanya)', en: 'İncekum (Alanya)', distFromAyt: 98, distFromGzp: 67, region: 'alanya' },
+            karaburun: { tr: 'Karaburun (Alanya)', en: 'Karaburun (Alanya)', distFromAyt: 93, distFromGzp: 72, region: 'alanya' },
+            kestel: { tr: 'Kestel (Alanya)', en: 'Kestel (Alanya)', distFromAyt: 130, distFromGzp: 35, region: 'alanya' },
+            oba: { tr: 'Oba (Alanya)', en: 'Oba (Alanya)', distFromAyt: 125, distFromGzp: 40, region: 'alanya' },
+            payallar: { tr: 'Payallar (Alanya)', en: 'Payallar (Alanya)', distFromAyt: 110, distFromGzp: 55, region: 'alanya' },
+            tosmur: { tr: 'Tosmur (Alanya)', en: 'Tosmur (Alanya)', distFromAyt: 127, distFromGzp: 38, region: 'alanya' },
+            okurcalar: { tr: 'Okurcalar (Alanya)', en: 'Okurcalar (Alanya)', distFromAyt: 90, distFromGzp: 75, region: 'alanya' },
+            avsallar: { tr: 'Avsallar (Alanya)', en: 'Avsallar (Alanya)', distFromAyt: 100, distFromGzp: 65, region: 'alanya' },
+            turkler: { tr: 'Türkler (Alanya)', en: 'Türkler (Alanya)', distFromAyt: 105, distFromGzp: 60, region: 'alanya' },
+            konakli: { tr: 'Konaklı (Alanya)', en: 'Konaklı (Alanya)', distFromAyt: 115, distFromGzp: 50, region: 'alanya' },
+            mahmutlar: { tr: 'Mahmutlar (Alanya)', en: 'Mahmutlar (Alanya)', distFromAyt: 135, distFromGzp: 30, region: 'alanya' },
+            kargicak: { tr: 'Kargıcak (Alanya)', en: 'Kargıcak (Alanya)', distFromAyt: 140, distFromGzp: 25, region: 'alanya' },
+            beldibi: { tr: 'Beldibi (Kemer)', en: 'Beldibi (Kemer)', distFromAyt: 45, distFromGzp: 205, region: 'kemer' },
+            goynuk: { tr: 'Göynük (Kemer)', en: 'Göynük (Kemer)', distFromAyt: 50, distFromGzp: 210, region: 'kemer' },
+            kiris: { tr: 'Kiriş (Kemer)', en: 'Kiriş (Kemer)', distFromAyt: 60, distFromGzp: 220, region: 'kemer' },
+            camyuva: { tr: 'Çamyuva (Kemer)', en: 'Çamyuva (Kemer)', distFromAyt: 62, distFromGzp: 222, region: 'kemer' },
+            tekirova: { tr: 'Tekirova (Kemer)', en: 'Tekirova (Kemer)', distFromAyt: 70, distFromGzp: 230, region: 'kemer' },
+            ulupinar: { tr: 'Ulupınar (Kemer/Adrasan)', en: 'Ulupınar (Kemer/Adrasan)', distFromAyt: 75, distFromGzp: 235, region: 'adrasan' },
+            olimpos: { tr: 'Olimpos', en: 'Olympos', distFromAyt: 90, distFromGzp: 250, region: 'adrasan' },
+            mavikent: { tr: 'Mavikent', en: 'Mavikent', distFromAyt: 105, distFromGzp: 265, region: 'adrasan' },
+            cirali: { tr: 'Çıralı', en: 'Çıralı', distFromAyt: 90, distFromGzp: 250, region: 'adrasan' },
+            kumluca: { tr: 'Kumluca', en: 'Kumluca', distFromAyt: 100, distFromGzp: 260, region: 'adrasan' },
+            finike: { tr: 'Finike', en: 'Finike', distFromAyt: 120, distFromGzp: 280, region: 'adrasan' },
+            demre: { tr: 'Demre', en: 'Demre', distFromAyt: 145, distFromGzp: 305, region: 'adrasan' },
+            kekova: { tr: 'Kekova', en: 'Kekova', distFromAyt: 165, distFromGzp: 325, region: 'adrasan' },
+            kalkan: { tr: 'Kalkan', en: 'Kalkan', distFromAyt: 220, distFromGzp: 380, region: 'adrasan' },
+            patara: { tr: 'Patara', en: 'Patara', distFromAyt: 225, distFromGzp: 385, region: 'adrasan' },
+            kas: { tr: 'Kaş', en: 'Kaş', distFromAyt: 200, distFromGzp: 360, region: 'adrasan' }
+        };
+
+        const locationBasePrices = {
+            kaleici: 30, kepez: 30, muratpasa: 30, aksu: 30, lara: 30, kundu: 30, konyaalti: 30,
+            belek: 40, kadriye: 40, serik: 40, bogazkent: 40,
+            ilica: 45, kumkoy: 45, evrenseki: 45, gundogdu: 45, colakli: 45, denizyaka: 45, sorgun: 45, titreyengol: 45,
+            cenger: 50, kizilagac: 50, kizilot: 50,
+            beldibi: 50, goynuk: 50, kiris: 50, camyuva: 50,
+            tekirova: 65,
+            cikcilli: 70, oba: 70, tosmur: 70, mahmutlar: 70, kargicak: 70,
+            incekum: 75, avsallar: 75, turkler: 75, konakli: 75, payallar: 75, okurcalar: 75, karaburun: 75, kestel: 75,
+            ulupinar: 70, olimpos: 70, cirali: 70, kumluca: 70,
+            mavikent: 80, finike: 90, demre: 90,
+            kalkan: 120, patara: 120, kekova: 130, kas: 125
+        };
+
+        let currentAgency = null;
+        let calculatedBasePrice = 0;
+        let calculatedNetPrice = 0;
+        let remainingCredit = 0;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Oturumu denetle
+            const authData = await requireAuth('agency');
+            if (!authData) return;
+
+            // Acente ve bakiye bilgilerini çek
+            await loadAgencyDetails(authData.profile, authData.session.user.id);
+            
+            // Lokasyonları yükle
+            setupLocationSelects();
+
+            // Event listener'ları kur
+            document.getElementById('pickup_location').addEventListener('change', updatePrice);
+            document.getElementById('dropoff_location').addEventListener('change', updatePrice);
+            document.getElementById('vehicle_type').addEventListener('change', updatePrice);
+
+            // İlk fiyat hesaplaması
+            updatePrice();
+
+            // Rezervasyon formu gönderim kontrolü
+            document.getElementById('booking-form').addEventListener('submit', handleBookingSubmit);
+        });
+
+        // Acente detaylarını yükleme
+        async function loadAgencyDetails(profile, userId) {
+            const { data: agency } = await window.supabaseClient
+                .from('agencies')
+                .select('*')
+                .eq('id', userId)
+                .single();
+
+            if (!agency) return;
+
+            currentAgency = agency;
+            loadUserNavbar(profile, agency);
+
+            const balance = parseFloat(agency.balance || 0);
+            const creditLimit = parseFloat(agency.credit_limit || 0);
+            remainingCredit = Math.max(0, creditLimit - balance);
+
+            document.getElementById('credit-limit-val').textContent = `€${remainingCredit.toFixed(2)}`;
+            document.getElementById('summary-discount').textContent = `-%${parseFloat(agency.discount_rate).toFixed(0)}`;
+        }
+
+        // Lokasyon Seçim Menülerini Doldurma
+        function setupLocationSelects() {
+            const pickupSelect = document.getElementById('pickup_location');
+            const dropoffSelect = document.getElementById('dropoff_location');
+
+            // Havalimanları ve Bölgeler
+            const optionsHTML = Object.keys(locations).map(key => {
+                const isAirport = locations[key].type === 'airport';
+                const name = locations[key].tr;
+                return `<option value="${key}">${isAirport ? '✈️ ' : '📍 '} ${name}</option>`;
+            }).join('');
+
+            pickupSelect.innerHTML = optionsHTML;
+            dropoffSelect.innerHTML = optionsHTML;
+
+            // Varsayılan seçimler (Pickup: Havalimanı, Dropoff: Kaleiçi)
+            pickupSelect.value = 'ayt';
+            dropoffSelect.value = 'kaleici';
+        }
+
+        // Fiyat Hesaplama Formülü
+        function updatePrice() {
+            const pickupId = document.getElementById('pickup_location').value;
+            const dropoffId = document.getElementById('dropoff_location').value;
+            const vehicleId = document.getElementById('vehicle_type').value;
+
+            if (pickupId === dropoffId) {
+                // Aynı nokta ise 0
+                setPriceDisplay(0, 0);
+                return;
+            }
+
+            const pickupLoc = locations[pickupId];
+            const dropoffLoc = locations[dropoffId];
+
+            let basePrice = 30;
+            const otherId = (pickupId === 'ayt') ? dropoffId : ((dropoffId === 'ayt') ? pickupId : null);
+
+            if (otherId && locationBasePrices[otherId] !== undefined) {
+                basePrice = locationBasePrices[otherId];
+            } else {
+                // Fallback mesafe hesabı
+                let distance = 50;
+                if (pickupId === 'gzp') {
+                    distance = dropoffLoc.distFromGzp;
+                } else if (dropoffId === 'gzp') {
+                    distance = pickupLoc.distFromGzp;
+                } else {
+                    distance = Math.abs(pickupLoc.distFromAyt - (dropoffLoc ? dropoffLoc.distFromAyt : 0));
+                }
+                distance = Math.max(distance, 15);
+                basePrice = 30 + (distance * 1.3);
+            }
+
+            // Araç tipi fiyatı
+            let finalPrice = basePrice;
+            if (vehicleId === 'vito_premium') {
+                finalPrice = basePrice + 15;
+            } else if (vehicleId === 'sprinter') {
+                finalPrice = basePrice + 35;
+            }
+
+            // Temiz fiyat için yuvarla
+            calculatedBasePrice = Math.round(finalPrice / 5) * 5;
+
+            // Acente İndirimi
+            const discountRate = currentAgency ? parseFloat(currentAgency.discount_rate) : 15;
+            calculatedNetPrice = calculatedBasePrice * (1 - discountRate / 100);
+            calculatedNetPrice = Math.round(calculatedNetPrice * 100) / 100; // virgülden sonra 2 hane
+
+            setPriceDisplay(calculatedBasePrice, calculatedNetPrice);
+            
+            // Kredi sınırı aşım uyarısı kontrolü
+            const limitWarning = document.getElementById('limit-warning');
+            const submitBtn = document.getElementById('submit-booking-btn');
+
+            if (calculatedNetPrice > remainingCredit) {
+                limitWarning.style.display = 'block';
+                submitBtn.disabled = true;
+            } else {
+                limitWarning.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Fiyat Gösterim Elemanlarını Güncelleme
+        function setPriceDisplay(basePrice, netPrice) {
+            document.getElementById('summary-base-price').textContent = `€${basePrice.toFixed(2)}`;
+            document.getElementById('summary-net-price').textContent = `€${netPrice.toFixed(2)}`;
+        }
+
+        // Rezervasyon Tamamlama İşlemi
+        async function handleBookingSubmit(e) {
+            e.preventDefault();
+
+            if (!window.supabaseClient || !currentAgency) return;
+
+            const submitBtn = document.getElementById('submit-booking-btn');
+            const alertContainer = document.getElementById('alert-container');
+
+            // Fiyat kontrolü
+            if (calculatedNetPrice > remainingCredit) {
+                alertContainer.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Cari kredi limitiniz yetersizdir. Lütfen ödeme yapın.</div>`;
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rezervasyon Kaydediliyor...';
+
+            const passengerName = document.getElementById('passenger_name').value.trim();
+            const flightNumber = document.getElementById('flight_number').value.trim().toUpperCase();
+            const pax = parseInt(document.getElementById('pax').value);
+            const luggage = parseInt(document.getElementById('luggage').value);
+            const vehicleType = document.getElementById('vehicle_type').value;
+            const pickupKey = document.getElementById('pickup_location').value;
+            const dropoffKey = document.getElementById('dropoff_location').value;
+            const pickupDate = document.getElementById('pickup_date').value;
+            const pickupTime = document.getElementById('pickup_time').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            const pickupLocationText = locations[pickupKey].tr;
+            const dropoffLocationText = locations[dropoffKey].tr;
+
+            // Benzersiz rezervasyon kodu üret (Örn: MVP-10342)
+            const randomCode = Math.floor(10000 + Math.random() * 90000);
+            const bookingCode = `MVP-${randomCode}`;
+
+            try {
+                // 1. Rezervasyonu veritabanına ekle
+                const { error: insertError } = await window.supabaseClient
+                    .from('bookings')
+                    .insert([{
+                        booking_code: bookingCode,
+                        agency_id: currentAgency.id,
+                        passenger_name: passengerName,
+                        pax: pax,
+                        luggage: luggage,
+                        flight_number: flightNumber || null,
+                        pickup_date: pickupDate,
+                        pickup_time: pickupTime,
+                        pickup_location: pickupLocationText,
+                        dropoff_location: dropoffLocationText,
+                        vehicle_type: vehicleType,
+                        base_price: calculatedBasePrice,
+                        agency_price: calculatedNetPrice,
+                        status: 'pending', // Yönetici onayı bekliyor
+                        notes: notes || null
+                    }]);
+
+                if (insertError) throw insertError;
+
+                // 2. Acentenin borcunu (balance) fiyat kadar artır
+                const newBalance = parseFloat(currentAgency.balance) + calculatedNetPrice;
+                const { error: updateError } = await window.supabaseClient
+                    .from('agencies')
+                    .update({ balance: newBalance })
+                    .eq('id', currentAgency.id);
+
+                if (updateError) throw updateError;
+
+                // Başarılı uyarısı
+                alertContainer.innerHTML = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Rezervasyon Başarıyla Oluşturuldu!</strong><br>
+                            Rezervasyon Kodu: <strong>${bookingCode}</strong>. Yönetici onayından sonra bilgilendirme yapılacaktır.
+                        </div>
+                    </div>
+                `;
+
+                // Rezervasyon listesine yönlendir
+                setTimeout(() => {
+                    window.location.href = 'bookings.html';
+                }, 3000);
+
+            } catch (err) {
+                console.error("Rezervasyon eklenirken hata:", err);
+                alertContainer.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> Rezervasyon oluşturulurken bir hata meydana geldi: ${err.message}</div>`;
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Rezervasyonu Tamamla';
+            }
+        }
+    </script>
+</body>
+</html>

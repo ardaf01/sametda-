@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain VIP Transfer - B2B Acente Girişi</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <img src="../assets/logo.png" alt="Mountain VIP Logo">
+            </div>
+            
+            <div class="auth-header">
+                <h1>B2B Acente Portalı</h1>
+                <p>Oturum açarak rezervasyon oluşturun ve yönetin.</p>
+            </div>
+
+            <!-- Supabase Key Warning Alert -->
+            <div id="config-warning" class="alert alert-danger" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>Supabase Bağlantısı Eksik!</strong><br>
+                    Lütfen <code>b2b/js/supabase-client.js</code> dosyasını düzenleyin ve Supabase URL ile Anon API anahtarınızı girin.
+                </div>
+            </div>
+
+            <!-- Standard feedback alerts -->
+            <div id="alert-container"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="email">E-posta Adresi</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" class="form-control" placeholder="agency@mountainvip.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label class="form-label" for="password">Şifre</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn-gold">
+                    <span>Giriş Yap</span> <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </form>
+            
+            <div style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+                Mountain VIP Transfer © 2026. Tüm hakları saklıdır.
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Local JS Configuration & Actions -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Yapılandırma uyarısı kontrolü
+            if (!window.SUPABASE_CONFIGURED) {
+                document.getElementById('config-warning').style.display = 'flex';
+                document.getElementById('submit-btn').disabled = true;
+            }
+
+            // Query parameter hata veya çıkış mesajları kontrolü
+            const urlParams = new URLSearchParams(window.location.search);
+            const alertContainer = document.getElementById('alert-container');
+
+            if (urlParams.has('error')) {
+                const error = urlParams.get('error');
+                let message = "Giriş yaparken bir sorun oluştu.";
+                if (error === 'unauthorized') message = "Lütfen önce giriş yapın.";
+                if (error === 'noprofile') message = "Kullanıcı profili bulunamadı.";
+                if (error === 'forbidden') message = "Bu sayfaya giriş yetkiniz yok.";
+                if (error === 'authfail') message = "Oturum doğrulanamadı.";
+                
+                alertContainer.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+            } else if (urlParams.has('loggedout')) {
+                alertContainer.innerHTML = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Başarıyla çıkış yapıldı. Tekrar görüşmek üzere!</span>
+                    </div>
+                `;
+            }
+
+            // Form Gönderimi
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const submitBtn = document.getElementById('submit-btn');
+                
+                // Loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Giriş Yapılıyor...';
+                alertContainer.innerHTML = '';
+
+                const { data, error } = await loginUser(email, password);
+
+                if (error) {
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Hata: ${error.message}</span>
+                        </div>
+                    `;
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Giriş Yap</span> <i class="fas fa-sign-in-alt"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

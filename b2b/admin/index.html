@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain VIP Transfer - B2B Admin Yönetim Paneli</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../style.css?v=1.0">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../../assets/logo.png" alt="Mountain VIP">
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index.html" class="sidebar-link active">
+                        <i class="fas fa-tasks"></i>
+                        <span>Rezervasyonlar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="agencies.html" class="sidebar-link">
+                        <i class="fas fa-building"></i>
+                        <span>Acenteler</span>
+                    </a>
+                </li>
+                <li style="margin-top: 2rem;">
+                    <a href="../dashboard.html" class="sidebar-link" style="color: var(--accent-gold);">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Acente Paneli</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" onclick="logoutUser(); return false;" class="sidebar-link" style="color: var(--danger-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Content Header Bar -->
+            <header class="content-header">
+                <div class="page-title">
+                    <h1>B2B Yönetim Paneli</h1>
+                    <p>Tüm acentelerden gelen rezervasyon talepleri ve durumları.</p>
+                </div>
+                <div class="user-profile-menu" id="user-profile-menu">
+                    <div class="spinner" style="width: 20px; height: 20px; border-width: 2px;"></div>
+                </div>
+            </header>
+
+            <!-- Stats Overview Cards -->
+            <section class="stats-grid">
+                <div class="stat-card gold">
+                    <div class="stat-info">
+                        <h3>Toplam Cari Alacak</h3>
+                        <p id="admin-stat-receivables">€0.00</p>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-info">
+                        <h3>Toplam Onaylı Rez.</h3>
+                        <p id="admin-stat-confirmed">0</p>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-info">
+                        <h3>Onay Bekleyenler</h3>
+                        <p id="admin-stat-pending">0</p>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-info">
+                        <h3>Kayıtlı Acenteler</h3>
+                        <p id="admin-stat-agencies">0</p>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                </div>
+            </section>
+
+            <!-- Search & Filter Area -->
+            <div class="card" style="padding: 1.2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                <div style="display: flex; flex: 1; min-width: 280px; gap: 0.8rem;">
+                    <div class="input-wrapper" style="flex: 1; margin-bottom: 0;">
+                        <i class="fas fa-search" style="left: 0.8rem;"></i>
+                        <input type="text" id="admin-search-bookings" class="form-control" placeholder="Yolcu adı, rezervasyon kodu veya acente ara..." style="padding-left: 2.2rem; font-size: 0.88rem;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.8rem; align-items: center;">
+                    <label class="form-label" style="margin-bottom: 0; white-space: nowrap; font-size: 0.8rem;">Durum:</label>
+                    <select id="admin-filter-status" class="form-control form-select-custom" style="padding: 0.4rem 2rem 0.4rem 1rem; font-size: 0.88rem; width: 160px; height: 38px;">
+                        <option value="all">Tüm Talepler</option>
+                        <option value="pending">Onay Bekleyenler</option>
+                        <option value="confirmed">Onaylanmışlar</option>
+                        <option value="completed">Tamamlanmışlar</option>
+                        <option value="cancelled">İptal Edilmişler</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Global Bookings List Table -->
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="b2b-table">
+                        <thead>
+                            <tr>
+                                <th>Acente</th>
+                                <th>Kod</th>
+                                <th>Yolcu Detayları</th>
+                                <th>Tarih &amp; Saat</th>
+                                <th>Rota &amp; Araç</th>
+                                <th>Acente Fiyatı</th>
+                                <th>Durum &amp; İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bookings-tbody">
+                            <tr>
+                                <td colspan="7" class="loading-wrapper">
+                                    <div class="spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Config and actions scripts -->
+    <script src="../js/supabase-client.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Oturumu denetle (Sadece Admin girebilir)
+            const authData = await requireAuth('admin');
+            if (!authData) return;
+
+            // Admin dashboard verilerini yükle
+            await initAdminDashboard(authData.profile);
+        });
+    </script>
+</body>
+</html>

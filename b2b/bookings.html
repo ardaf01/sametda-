@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain VIP Transfer - Rezervasyonlarım</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../assets/logo.png" alt="Mountain VIP">
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html" class="sidebar-link">
+                        <i class="fas fa-th-large"></i>
+                        <span>Panel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="new-booking.html" class="sidebar-link">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Yeni Rezervasyon</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bookings.html" class="sidebar-link active">
+                        <i class="fas fa-list-ul"></i>
+                        <span>Rezervasyonlarım</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" onclick="logoutUser(); return false;" class="sidebar-link" style="color: var(--danger-color);">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Çıkış Yap</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Content Header Bar -->
+            <header class="content-header">
+                <div class="page-title">
+                    <h1>Rezervasyonlarım</h1>
+                    <p>Oluşturduğunuz tüm aktif ve geçmiş transfer rezervasyonları.</p>
+                </div>
+                <div class="user-profile-menu" id="user-profile-menu">
+                    <div class="spinner" style="width: 20px; height: 20px; border-width: 2px;"></div>
+                </div>
+            </header>
+
+            <!-- Bookings Search & Filter Controls -->
+            <div class="card" style="padding: 1.2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                <div style="display: flex; flex: 1; min-width: 280px; gap: 0.8rem;">
+                    <div class="input-wrapper" style="flex: 1; margin-bottom: 0;">
+                        <i class="fas fa-search" style="left: 0.8rem;"></i>
+                        <input type="text" id="search-bookings" class="form-control" placeholder="Yolcu adı veya rezervasyon kodu ile ara..." style="padding-left: 2.2rem; font-size: 0.88rem;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.8rem; align-items: center;">
+                    <label class="form-label" style="margin-bottom: 0; white-space: nowrap; font-size: 0.8rem;">Durum Filtresi:</label>
+                    <select id="filter-status" class="form-control form-select-custom" style="padding: 0.4rem 2rem 0.4rem 1rem; font-size: 0.88rem; width: 160px; height: 38px;">
+                        <option value="all">Tüm Durumlar</option>
+                        <option value="pending">Bekleyenler</option>
+                        <option value="confirmed">Onaylananlar</option>
+                        <option value="completed">Tamamlananlar</option>
+                        <option value="cancelled">İptal Edilenler</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Bookings List Table -->
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="b2b-table" id="all-bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Kod</th>
+                                <th>Yolcu Adı</th>
+                                <th>Tarih &amp; Saat</th>
+                                <th>Güzergah</th>
+                                <th>Araç Tipi</th>
+                                <th>Acente Net Tutar</th>
+                                <th>Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-all-tbody">
+                            <tr>
+                                <td colspan="7" class="loading-wrapper">
+                                    <div class="spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Config and actions scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Oturumu denetle
+            const authData = await requireAuth('agency');
+            if (!authData) return;
+
+            // Rezervasyonlar listesini yükle
+            await initBookingsPage(authData.profile, authData.session.user.id);
+        });
+    </script>
+</body>
+</html>
