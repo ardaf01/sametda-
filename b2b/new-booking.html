@@ -191,6 +191,118 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Ekstra Hizmetler ve İkramlar -->
+                        <div style="border-top: 1px dashed var(--border-color); padding-top: 1.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                            <h3 style="font-size: 1.1rem; color: var(--accent-gold); margin-bottom: 1rem;"><i class="fas fa-plus-circle"></i> Ekstra Hizmetler & Araç İçi İkramlar</h3>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                                <!-- Çocuk Yolcu -->
+                                <div class="form-group">
+                                    <label class="form-label" for="child_count">Çocuk Yolcu</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-child" style="left:0.8rem;"></i>
+                                        <select id="child_count" class="form-control form-select-custom" style="padding-left: 2.2rem;">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Bebek Koltuğu -->
+                                <div class="form-group">
+                                    <label class="form-label" for="baby_seat">Bebek Koltuğu (Ücretsiz)</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-baby" style="left:0.8rem;"></i>
+                                        <select id="baby_seat" class="form-control form-select-custom" style="padding-left: 2.2rem;">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Spor Bagajı -->
+                                <div class="form-group">
+                                    <label class="form-label" for="sport_luggage">Golf / Ekstra Bagaj</label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-golf-ball" style="left:0.8rem;"></i>
+                                        <select id="sport_luggage" class="form-control form-select-custom" style="padding-left: 2.2rem;">
+                                            <option value="none">Yok / None</option>
+                                            <option value="golf">Golf Çantası (+€5)</option>
+                                            <option value="bike">Bisiklet / Puset (+€5)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="form-label" style="margin-bottom: 0.8rem;">Araç İçi İkramlar</label>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+                                <!-- Coke -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 8px;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0; cursor: pointer;">
+                                        <input type="checkbox" id="drink-coke" class="drink-checkbox" value="Coke" style="cursor: pointer;">
+                                        <span>Coca Cola (+€4)</span>
+                                    </label>
+                                    <select id="drink-coke-qty" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.1rem 0.3rem; display: none;">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <!-- Fanta -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 8px;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0; cursor: pointer;">
+                                        <input type="checkbox" id="drink-fanta" class="drink-checkbox" value="Fanta" style="cursor: pointer;">
+                                        <span>Fanta (+€4)</span>
+                                    </label>
+                                    <select id="drink-fanta-qty" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.1rem 0.3rem; display: none;">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <!-- Beer -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 8px;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0; cursor: pointer;">
+                                        <input type="checkbox" id="drink-beer" class="drink-checkbox" value="Beer" style="cursor: pointer;">
+                                        <span>Soğuk Bira (+€6)</span>
+                                    </label>
+                                    <select id="drink-beer-qty" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.1rem 0.3rem; display: none;">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <!-- Water -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 8px;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0; cursor: pointer;">
+                                        <input type="checkbox" id="drink-water" class="drink-checkbox" value="Water" style="cursor: pointer;">
+                                        <span>Soğuk Su (+€2)</span>
+                                    </label>
+                                    <select id="drink-water-qty" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.1rem 0.3rem; display: none;">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Special Notes -->
                         <div class="form-group">
@@ -349,6 +461,20 @@
             document.getElementById('pickup_location').addEventListener('change', updatePrice);
             document.getElementById('dropoff_location').addEventListener('change', updatePrice);
             document.getElementById('vehicle_type').addEventListener('change', updatePrice);
+            document.getElementById('child_count').addEventListener('change', updatePrice);
+            document.getElementById('baby_seat').addEventListener('change', updatePrice);
+            document.getElementById('sport_luggage').addEventListener('change', updatePrice);
+
+            // İçecek seçimleri için görünümleri ve hesaplamayı bağla
+            ['coke', 'fanta', 'beer', 'water'].forEach(drink => {
+                const cb = document.getElementById(`drink-${drink}`);
+                const qty = document.getElementById(`drink-${drink}-qty`);
+                cb.addEventListener('change', () => {
+                    qty.style.display = cb.checked ? 'block' : 'none';
+                    updatePrice();
+                });
+                qty.addEventListener('change', updatePrice);
+            });
 
             // İlk fiyat hesaplaması
             updatePrice();
@@ -440,6 +566,28 @@
                 finalPrice = basePrice + 35;
             }
 
+            // Ekstra ücretleri ekle
+            let extrasPrice = 0;
+            const sportLuggage = document.getElementById('sport_luggage').value;
+            if (sportLuggage === 'golf' || sportLuggage === 'bike') {
+                extrasPrice += 5;
+            }
+
+            if (document.getElementById('drink-coke').checked) {
+                extrasPrice += 4 * parseInt(document.getElementById('drink-coke-qty').value);
+            }
+            if (document.getElementById('drink-fanta').checked) {
+                extrasPrice += 4 * parseInt(document.getElementById('drink-fanta-qty').value);
+            }
+            if (document.getElementById('drink-beer').checked) {
+                extrasPrice += 6 * parseInt(document.getElementById('drink-beer-qty').value);
+            }
+            if (document.getElementById('drink-water').checked) {
+                extrasPrice += 2 * parseInt(document.getElementById('drink-water-qty').value);
+            }
+
+            finalPrice += extrasPrice;
+
             // Temiz fiyat için yuvarla
             calculatedBasePrice = Math.round(finalPrice / 5) * 5;
 
@@ -498,6 +646,31 @@
             const pickupTime = document.getElementById('pickup_time').value;
             const notes = document.getElementById('notes').value.trim();
 
+            const childCount = parseInt(document.getElementById('child_count').value);
+            const babySeat = parseInt(document.getElementById('baby_seat').value);
+            const sportLuggage = document.getElementById('sport_luggage').value;
+            
+            let extrasArray = [];
+            if (childCount > 0) extrasArray.push(`Çocuk Yolcu: ${childCount}`);
+            if (babySeat > 0) extrasArray.push(`Bebek Koltuğu: ${babySeat}`);
+            if (sportLuggage === 'golf') extrasArray.push(`Ekstra Bagaj: Golf Çantası (+€5)`);
+            if (sportLuggage === 'bike') extrasArray.push(`Ekstra Bagaj: Bisiklet/Puset (+€5)`);
+            
+            // İçecekler
+            ['coke', 'fanta', 'beer', 'water'].forEach(drink => {
+                if (document.getElementById(`drink-${drink}`).checked) {
+                    const qty = document.getElementById(`drink-${drink}-qty`).value;
+                    const name = drink === 'coke' ? 'Cola' : (drink === 'fanta' ? 'Fanta' : (drink === 'beer' ? 'Bira' : 'Su'));
+                    const price = drink === 'coke' ? 4 : (drink === 'fanta' ? 4 : (drink === 'beer' ? 6 : 2));
+                    extrasArray.push(`${name} x${qty} (+€${price * qty})`);
+                }
+            });
+
+            let finalNotes = notes;
+            if (extrasArray.length > 0) {
+                finalNotes = `[SEÇİLEN EKSTRALAR: ${extrasArray.join(', ')}]\n\n${notes}`;
+            }
+
             const pickupLocationText = locations[pickupKey].tr;
             const dropoffLocationText = locations[dropoffKey].tr;
 
@@ -524,7 +697,7 @@
                         base_price: calculatedBasePrice,
                         agency_price: calculatedNetPrice,
                         status: 'pending', // Yönetici onayı bekliyor
-                        notes: notes || null
+                        notes: finalNotes || null
                     }]);
 
                 if (insertError) throw insertError;
