@@ -3885,6 +3885,27 @@ function sendCallMeBotNotification(messageText) {
         .then(() => console.log('[CallMeBot] Notification successfully sent to +905442595196'))
         .catch(err => console.error('[CallMeBot] Notification delivery failed:', err));
 }
-window.sendCallMeBotNotification = sendCallMeBotNotification;
+// --- Secret Admin Portal Access Link in Footer ---
+document.addEventListener('DOMContentLoaded', () => {
+    const adminTrigger = document.getElementById('copyright-admin-link');
+    if (adminTrigger) {
+        let clickCount = 0;
+        adminTrigger.addEventListener('click', (e) => {
+            clickCount++;
+            // Require 5 clicks within a short time to trigger the password prompt (prevents accidental access)
+            if (clickCount >= 5) {
+                clickCount = 0;
+                const password = prompt("Lütfen yönetici şifresini girin:");
+                if (password === "Samet.123") {
+                    window.location.href = "/b2b/index.html";
+                } else if (password !== null) {
+                    alert("Geçersiz şifre!");
+                }
+            }
+            // Reset click count after 3 seconds
+            setTimeout(() => { clickCount = 0; }, 3000);
+        });
+    }
+});
 
 
