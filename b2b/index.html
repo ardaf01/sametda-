@@ -15,6 +15,32 @@
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/b2b/style.css?v=1.2">
+    
+    <!-- Hata Teşhis ve Loglama Sistemi (Diagnostic Script) -->
+    <script>
+        window.diagnosticErrors = [];
+        window.onerror = function(message, source, lineno, colno, error) {
+            const errStr = message + " (" + source + ":" + lineno + ")";
+            window.diagnosticErrors.push(errStr);
+            
+            const showErr = () => {
+                const box = document.getElementById('config-warning');
+                if (box) {
+                    box.style.display = 'flex';
+                    box.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Tarayıcı Hatası Tespit Edildi:</strong><br>
+                            <code style="word-break: break-all; font-size: 0.8rem; color: #ff6b6b;">${errStr}</code>
+                        </div>
+                    `;
+                }
+            };
+            if (document.body) showErr();
+            else document.addEventListener('DOMContentLoaded', showErr);
+            return false;
+        };
+    </script>
 </head>
 <body>
 
