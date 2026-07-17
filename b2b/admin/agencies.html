@@ -132,28 +132,52 @@
                         </form>
                     </div>
 
-                    <div class="card">
-                        <h2><i class="fas fa-user-plus"></i> Yeni Acente Ekleme</h2>
-                        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
-                            Supabase mimarisi gereği acenteleri kendi şifrelerini belirleyebilecekleri şekilde en güvenli olarak panelden davet edebilirsiniz.
-                        </p>
-                        <h4 style="font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; color: var(--accent-gold);">Adımlar:</h4>
-                        <ol style="font-size: 0.82rem; color: var(--text-secondary); padding-left: 1.2rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.5rem;">
-                            <li><strong>Supabase Paneline</strong> girin.</li>
-                            <li><strong>Authentication -> Users</strong> sekmesine gidin.</li>
-                            <li><strong>"Add User" -> "Create User"</strong> butonuna tıklayın.</li>
-                            <li>Acentenin <strong>E-Postasını</strong> ve geçici şifresini yazın.</li>
-                            <li>
-                                <strong>User Metadata</strong> alanına şunları yazarak kaydedin:
-                                <pre style="background: var(--bg-primary); border: 1px solid var(--border-color); padding: 0.4rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.3rem;">
-{
-  "company_name": "Sunny Tours",
-  "contact_person": "Hans",
-  "phone": "+49 xxx"
-}</pre>
-                            </li>
-                            <li>Acente anında bu listeye düşecek ve giriş yapabilecektir.</li>
-                        </ol>
+                    <div class="card" id="add-agency-card">
+                        <h2><i class="fas fa-user-plus"></i> Yeni Acente Ekle</h2>
+                        <div id="add-agency-alert" style="margin-top:0.5rem; margin-bottom:1rem;"></div>
+                        
+                        <form id="agency-add-form">
+                            <div class="form-group">
+                                <label class="form-label" for="add-company-name">Şirket / Acente Adı</label>
+                                <input type="text" id="add-company-name" class="form-control" placeholder="Örn: Sunny Tours" style="padding-left:1rem;" required>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="add-contact-person">Yetkili Adı</label>
+                                    <input type="text" id="add-contact-person" class="form-control" placeholder="Örn: Hans Müller" style="padding-left:1rem;" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="add-phone">Telefon Numarası</label>
+                                    <input type="text" id="add-phone" class="form-control" placeholder="Örn: +49170xxx" style="padding-left:1rem;" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="add-email">Acente Giriş E-postası</label>
+                                <input type="email" id="add-email" class="form-control" placeholder="Örn: login@sunnytours.com" style="padding-left:1rem;" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="add-password">Acente Giriş Şifresi</label>
+                                <input type="password" id="add-password" class="form-control" placeholder="Minimum 6 haneli şifre" style="padding-left:1rem;" minlength="6" required>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label" for="add-discount">İndirim Oranı (%)</label>
+                                    <input type="number" id="add-discount" class="form-control" style="padding-left:1rem;" min="0" max="100" value="15" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="add-limit">Kredi Limiti (€)</label>
+                                    <input type="number" id="add-limit" class="form-control" style="padding-left:1rem;" min="0" value="1000" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" id="add-agency-btn" class="btn-gold" style="width: 100%; margin-top: 1rem;">
+                                <i class="fas fa-plus"></i> Acenteyi Kaydet &amp; Yetkilendir
+                            </button>
+                        </form>
                     </div>
                 </div>
                 
@@ -167,7 +191,7 @@
     
     <script src="/b2b/js/db-config.js?v=1.5"></script>
     <script src="/b2b/js/auth.js?v=1.5"></script>
-    <script src="/b2b/js/admin-dashboard.js?v=1.2"></script>
+    <script src="/b2b/js/admin-dashboard.js?v=1.3"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', async () => {

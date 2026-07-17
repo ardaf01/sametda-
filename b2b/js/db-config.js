@@ -22,3 +22,5 @@ try {
 // Global olarak erişilebilir kılalım
 window.supabaseClient = sbClient;
 window.SUPABASE_CONFIGURED = (SUPABASE_URL !== "https://your-project-url.supabase.co");
+window.SUPABASE_URL = SUPABASE_URL;
+window.SUPABASE_ANON_KEY = SUPABASE_ANON_KEY;

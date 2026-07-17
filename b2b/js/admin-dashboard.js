@@ -213,6 +213,12 @@ async function initAdminAgenciesPage(profile) {
         // Edit form submit listener
         document.getElementById('agency-edit-form').addEventListener('submit', handleAgencyEditSubmit);
 
+        // Add form submit listener
+        const addForm = document.getElementById('agency-add-form');
+        if (addForm) {
+            addForm.addEventListener('submit', handleAgencyAddSubmit);
+        }
+
     } catch (e) {
         console.error("Acenteler yüklenirken hata:", e);
     }
@@ -308,6 +314,89 @@ async function handleAgencyEditSubmit(e) {
     } catch (err) {
         console.error("Acente güncellenirken hata:", err);
         alert("Güncelleme başarısız oldu: " + err.message);
+    }
+}
+
+// Acente ekleme formu gönderim kontrolü
+async function handleAgencyAddSubmit(e) {
+    e.preventDefault();
+
+    if (!window.supabaseClient || !window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+        alert("Supabase bağlantı bilgileri alınamadı.");
+        return;
+    }
+
+    const companyName = document.getElementById('add-company-name').value.trim();
+    const contactPerson = document.getElementById('add-contact-person').value.trim();
+    const phone = document.getElementById('add-phone').value.trim();
+    const email = document.getElementById('add-email').value.trim();
+    const password = document.getElementById('add-password').value;
+    const discountRate = parseFloat(document.getElementById('add-discount').value);
+    const creditLimit = parseFloat(document.getElementById('add-limit').value);
+
+    const alertBox = document.getElementById('add-agency-alert');
+    const submitBtn = document.getElementById('add-agency-btn');
+
+    alertBox.innerHTML = '';
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Kaydediliyor...';
+
+    try {
+        // Geçici Supabase istemcisi (mevcut admin oturumunu bozmamak için)
+        const tempClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY, {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false
+            }
+        });
+
+        // 1. Supabase Auth signup (Bu otomatik tetikleyicilerle public tabloları besleyecek)
+        const { data, error } = await tempClient.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    role: 'agency',
+                    company_name: companyName,
+                    contact_person: contactPerson,
+                    phone: phone,
+                    discount_rate: discountRate,
+                    credit_limit: creditLimit
+                }
+            }
+        });
+
+        if (error) throw error;
+
+        // Başarılı uyarısı
+        alertBox.innerHTML = `
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>Acente Başarıyla Eklendi!</strong><br>
+                    Acente hesabı oluşturuldu ve cari tanımlandı. Artık giriş yapabilirler.
+                </div>
+            </div>
+        `;
+
+        // Formu temizle
+        document.getElementById('agency-add-form').reset();
+
+        // Acente listesini yenile
+        const activeProfile = { email: document.getElementById('user-profile-menu').innerText.split('\n')[1] || 'Admin' };
+        await initAdminAgenciesPage(activeProfile);
+
+    } catch (err) {
+        console.error("Acente eklenirken hata:", err);
+        alertBox.innerHTML = `
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Hata: ${err.message}</span>
+            </div>
+        `;
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-plus"></i> Acenteyi Kaydet &amp; Yetkilendir';
     }
 }
 
