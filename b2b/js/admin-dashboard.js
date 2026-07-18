@@ -254,14 +254,14 @@ function renderAdminAgenciesTable(agenciesList) {
                         </a>
                     </div>
                 </td>
-                <td>${escapeHTML(a.contact_person || '-')}</td>
-                <td>
+                <td data-label="Yetkili">${escapeHTML(a.contact_person || '-')}</td>
+                <td data-label="İletişim">
                     <span style="font-size:0.85rem; display:block;">📞 ${escapeHTML(a.phone || '-')}</span>
                     <span style="font-size:0.75rem; color:var(--text-muted); display:block;">ID: ${a.id.substring(0,8)}...</span>
                 </td>
-                <td><strong>%${parseFloat(a.discount_rate).toFixed(0)}</strong></td>
-                <td>€${parseFloat(a.credit_limit).toFixed(2)}</td>
-                <td><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
+                <td data-label="İndirim"><strong>%${parseFloat(a.discount_rate).toFixed(0)}</strong></td>
+                <td data-label="Limit">€${parseFloat(a.credit_limit).toFixed(2)}</td>
+                <td data-label="Borç (Bakiye)"><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
             </tr>
         `;
     }).join('');
