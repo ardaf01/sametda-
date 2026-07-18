@@ -253,8 +253,11 @@ function renderAdminAgenciesTable(agenciesList) {
                 <td>€${parseFloat(a.credit_limit).toFixed(2)}</td>
                 <td><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
                 <td>
-                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance})">
+                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; margin-right: 0.3rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance})">
                         <i class="fas fa-edit"></i> Düzenle
+                    </button>
+                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; color: var(--danger-color); border-color: rgba(231, 29, 54, 0.2);" onclick="deleteAgency('${a.id}', '${escapeHTML(a.company_name)}')">
+                        <i class="fas fa-trash-alt"></i> Sil
                     </button>
                 </td>
             </tr>
@@ -399,6 +402,31 @@ async function handleAgencyAddSubmit(e) {
         submitBtn.innerHTML = '<i class="fas fa-plus"></i> Acenteyi Kaydet &amp; Yetkilendir';
     }
 }
+
+// Acente silme fonksiyonu
+async function deleteAgency(id, name) {
+    if (!window.supabaseClient) return;
+
+    if (!confirm(`"${name}" acentesini silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve acente sisteme giriş yapamayacaktır.`)) return;
+
+    try {
+        const { error } = await window.supabaseClient
+            .from('profiles')
+            .delete()
+            .eq('id', id);
+
+        if (error) throw error;
+
+        alert("Acente başarıyla silindi.");
+        
+        const activeProfile = { email: document.getElementById('user-profile-menu').innerText.split('\n')[1] || 'Admin' };
+        await initAdminAgenciesPage(activeProfile);
+    } catch (err) {
+        console.error("Acente silinirken hata:", err);
+        alert("Silme işlemi başarısız: " + err.message);
+    }
+}
+window.deleteAgency = deleteAgency;
 
 
 // =======================================================
