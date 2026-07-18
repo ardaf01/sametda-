@@ -242,24 +242,26 @@ function renderAdminAgenciesTable(agenciesList) {
     tbody.innerHTML = agenciesList.map(a => {
         return `
             <tr>
-                <td><strong>${escapeHTML(a.company_name)}</strong></td>
+                <td>
+                    <strong style="display:block; margin-bottom: 0.2rem;">${escapeHTML(a.company_name)}</strong>
+                    <div style="display: flex; gap: 0.5rem; font-size: 0.72rem;">
+                        <a href="#" style="color: var(--accent-gold); text-decoration: none; display: inline-flex; align-items: center; gap: 0.2rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance}, '${escapeHTML(a.contact_person)}', '${escapeHTML(a.phone)}'); return false;">
+                            <i class="fas fa-pencil-alt"></i> Düzenle
+                        </a>
+                        <span style="color: var(--border-color);">|</span>
+                        <a href="#" style="color: var(--danger-color); text-decoration: none; display: inline-flex; align-items: center; gap: 0.2rem;" onclick="deleteAgency('${a.id}', '${escapeHTML(a.company_name)}'); return false;">
+                            <i class="fas fa-trash-alt"></i> Sil
+                        </a>
+                    </div>
+                </td>
                 <td>${escapeHTML(a.contact_person || '-')}</td>
                 <td>
                     <span style="font-size:0.85rem; display:block;">📞 ${escapeHTML(a.phone || '-')}</span>
-                    <!-- Email will be loaded dynamically or resolved if stored -->
                     <span style="font-size:0.75rem; color:var(--text-muted); display:block;">ID: ${a.id.substring(0,8)}...</span>
                 </td>
                 <td><strong>%${parseFloat(a.discount_rate).toFixed(0)}</strong></td>
                 <td>€${parseFloat(a.credit_limit).toFixed(2)}</td>
                 <td><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
-                <td>
-                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; margin-right: 0.3rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance}, '${escapeHTML(a.contact_person)}', '${escapeHTML(a.phone)}')">
-                        <i class="fas fa-edit"></i> Düzenle
-                    </button>
-                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; color: var(--danger-color); border-color: rgba(231, 29, 54, 0.2);" onclick="deleteAgency('${a.id}', '${escapeHTML(a.company_name)}')">
-                        <i class="fas fa-trash-alt"></i> Sil
-                    </button>
-                </td>
             </tr>
         `;
     }).join('');
