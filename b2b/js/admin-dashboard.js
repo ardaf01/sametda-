@@ -253,7 +253,7 @@ function renderAdminAgenciesTable(agenciesList) {
                 <td>€${parseFloat(a.credit_limit).toFixed(2)}</td>
                 <td><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
                 <td>
-                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; margin-right: 0.3rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance})">
+                    <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; margin-right: 0.3rem;" onclick="openEditAgencyCard('${a.id}', '${escapeHTML(a.company_name)}', ${a.discount_rate}, ${a.credit_limit}, ${a.balance}, '${escapeHTML(a.contact_person)}', '${escapeHTML(a.phone)}')">
                         <i class="fas fa-edit"></i> Düzenle
                     </button>
                     <button class="btn-outline" style="padding:0.3rem 0.6rem; font-size:0.8rem; color: var(--danger-color); border-color: rgba(231, 29, 54, 0.2);" onclick="deleteAgency('${a.id}', '${escapeHTML(a.company_name)}')">
@@ -266,9 +266,11 @@ function renderAdminAgenciesTable(agenciesList) {
 }
 
 // Acente cari bilgilerini düzenleme kartını açma
-function openEditAgencyCard(id, name, discount, limit, balance) {
+function openEditAgencyCard(id, name, discount, limit, balance, contactPerson = '', phone = '') {
     document.getElementById('edit-agency-id').value = id;
     document.getElementById('edit-agency-name').value = name;
+    document.getElementById('edit-contact-person').value = contactPerson;
+    document.getElementById('edit-phone').value = phone;
     document.getElementById('edit-discount').value = discount;
     document.getElementById('edit-limit').value = limit;
     document.getElementById('edit-balance').value = balance;
@@ -290,6 +292,9 @@ async function handleAgencyEditSubmit(e) {
     if (!window.supabaseClient) return;
 
     const id = document.getElementById('edit-agency-id').value;
+    const name = document.getElementById('edit-agency-name').value.trim();
+    const contactPerson = document.getElementById('edit-contact-person').value.trim();
+    const phone = document.getElementById('edit-phone').value.trim();
     const discount = parseFloat(document.getElementById('edit-discount').value);
     const limit = parseFloat(document.getElementById('edit-limit').value);
     const balance = parseFloat(document.getElementById('edit-balance').value);
@@ -298,6 +303,9 @@ async function handleAgencyEditSubmit(e) {
         const { error } = await window.supabaseClient
             .from('agencies')
             .update({
+                company_name: name,
+                contact_person: contactPerson,
+                phone: phone,
                 discount_rate: discount,
                 credit_limit: limit,
                 balance: balance
