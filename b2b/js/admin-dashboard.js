@@ -261,7 +261,7 @@ function renderAdminAgenciesTable(agenciesList) {
                 </td>
                 <td data-label="İndirim"><strong>%${parseFloat(a.discount_rate).toFixed(0)}</strong></td>
                 <td data-label="Limit">€${parseFloat(a.credit_limit).toFixed(2)}</td>
-                <td data-label="Borç (Bakiye)"><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
+                <td data-label="Bakiye"><strong class="text-gold">€${parseFloat(a.balance).toFixed(2)}</strong></td>
             </tr>
         `;
     }).join('');
