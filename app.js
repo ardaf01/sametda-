@@ -2602,18 +2602,41 @@ function openBookingModal(type, vehicleId) {
     if (vehicleId) {
         state.vehicleType = vehicleId;
     }
-    
+
+    // ── Sync widget form values into state BEFORE opening modal ──
+    // This ensures fleet card "Rezervasyon Yap" buttons carry the
+    // correct location even when the main form has not been submitted.
+    const wPickupEl  = document.getElementById('booking-pickup');
+    const wDropoffEl = document.getElementById('booking-dropoff');
+    const wPickupSearchEl  = document.getElementById('booking-pickup-search');
+    const wDropoffSearchEl = document.getElementById('booking-dropoff-search');
+    const wDateEl    = document.getElementById('booking-date');
+    const wTimeEl    = document.getElementById('booking-time');
+    const wPaxEl     = document.getElementById('booking-pax');
+
+    if (wPickupEl  && wPickupEl.value)  state.pickup    = wPickupEl.value;
+    if (wDropoffEl && wDropoffEl.value) state.dropoff   = wDropoffEl.value;
+    if (wDateEl    && wDateEl.value)    state.date      = wDateEl.value;
+    if (wTimeEl    && wTimeEl.value)    state.time      = wTimeEl.value;
+    if (wPaxEl     && wPaxEl.value)     state.passengers = wPaxEl.value;
+
+    // If pickup is still empty, default to AYT airport
+    if (!state.pickup) state.pickup = 'ayt';
+
     const modal = document.getElementById('booking-modal');
     if (modal) {
-        // Pre-populate Pickup & Dropoff fields
-        const modalPickup = document.getElementById('modal-pickup');
+        // Pre-populate Pickup & Dropoff fields from synced state
+        const modalPickup  = document.getElementById('modal-pickup');
         const modalDropoff = document.getElementById('modal-dropoff');
         if (modalPickup && modalDropoff) {
             const lang = state.currentLang;
             const pLoc = locations[state.pickup];
             const dLoc = locations[state.dropoff];
-            modalPickup.value = pLoc ? (pLoc[lang] || pLoc.en) : (state.pickup || '');
-            modalDropoff.value = dLoc ? (dLoc[lang] || dLoc.en) : (state.dropoff || '');
+            // Use the search box text if available (handles custom hotel names)
+            const pickupText  = wPickupSearchEl  && wPickupSearchEl.value.trim()  ? wPickupSearchEl.value.trim()  : (pLoc ? (pLoc[lang] || pLoc.en) : (state.pickup || ''));
+            const dropoffText = wDropoffSearchEl && wDropoffSearchEl.value.trim() ? wDropoffSearchEl.value.trim() : (dLoc ? (dLoc[lang] || dLoc.en) : (state.dropoff || ''));
+            modalPickup.value  = pickupText;
+            modalDropoff.value = dropoffText;
         }
 
         // Reset modal fields
