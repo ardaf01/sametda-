@@ -105,9 +105,9 @@ function renderAdminBookingsTable(bookingsList) {
         const statusOptions = `
             <select class="form-control" style="width:130px; height:34px; padding:0 0.5rem; font-size:0.8rem;" onchange="updateBookingStatus('${b.id}', this.value, '${b.agency_id}', ${b.agency_price}, '${b.status}')">
                 <option value="pending" ${b.status === 'pending' ? 'selected' : ''}>Bekliyor</option>
-                <option value="confirmed" ${b.status === 'confirmed' ? 'selected' : ''}>Onayla</option>
+                <option value="confirmed" ${b.status === 'confirmed' ? 'selected' : ''}>Onaylandı</option>
                 <option value="completed" ${b.status === 'completed' ? 'selected' : ''}>Tamamlandı</option>
-                <option value="cancelled" ${b.status === 'cancelled' ? 'selected' : ''}>İptal Et</option>
+                <option value="cancelled" ${b.status === 'cancelled' ? 'selected' : ''}>İptal Edildi</option>
             </select>
         `;
 
