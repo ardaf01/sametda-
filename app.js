@@ -1637,7 +1637,7 @@ function setBookingType(type) {
         
         if (labelPickup) labelPickup.innerText = state.currentLang === 'tr' ? 'Nereden?' : 'Pickup?';
         if (labelDate) labelDate.innerText = state.currentLang === 'tr' ? 'Gidiş Tarihi' : 'Pickup Date';
-        if (labelTime) labelTime.innerText = state.currentLang === 'tr' ? 'Gidiş Saati' : 'Pickup Time';
+        if (labelTime) labelTime.innerText = state.currentLang === 'tr' ? 'Uçak Saati' : 'Flight Time';
         if (btnCalcText) btnCalcText.innerText = state.currentLang === 'tr' ? 'Fiyat Hesapla' : 'Calculate Price';
         if (labelText) labelText.innerText = state.currentLang === 'tr' ? 'Hızlı VIP Transfer Rezervasyonu' : 'Quick VIP Transfer Booking';
         
@@ -3221,6 +3221,7 @@ document.addEventListener('DOMContentLoaded', () => {
             minDate: "today",
             dateFormat: "Y-m-d",
             defaultDate: todayStr,
+            disableMobile: true,
             onChange: function(selectedDates, dateStr) {
                 state.date = dateStr;
                 updateWhatsAppWidgetLink();
@@ -3235,6 +3236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dateFormat: "H:i",
             time_24hr: true,
             defaultDate: defaultTimeStr,
+            disableMobile: true,
             onChange: function(selectedDates, timeStr) {
                 state.time = timeStr;
                 updateWhatsAppWidgetLink();
@@ -3248,6 +3250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             minDate: "today",
             dateFormat: "Y-m-d",
             defaultDate: returnDateStr,
+            disableMobile: true,
             onChange: function(selectedDates, dateStr) {
                 state.returnDate = dateStr;
                 updateWhatsAppWidgetLink();
@@ -3262,6 +3265,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dateFormat: "H:i",
             time_24hr: true,
             defaultDate: defaultTimeStr,
+            disableMobile: true,
             onChange: function(selectedDates, timeStr) {
                 state.returnTime = timeStr;
                 updateWhatsAppWidgetLink();
